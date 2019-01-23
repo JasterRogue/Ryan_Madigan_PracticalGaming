@@ -1,0 +1,3 @@
+Camera Placement
+
+Game will have scene view for the camera giving a view of the area but also following the characters movement 

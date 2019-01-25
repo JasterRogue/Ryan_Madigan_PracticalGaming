@@ -1,14 +1,16 @@
 Character Movement
 
-W Key - Move Character Forward and sets character direction to forward
-S Key - Move Character Back and  sets character direction to back
-A Key - Move Character Left and sets character direction to left
-D Key - Move Character Right and sets character direction to right
+W Key - Move Character Forward and sets character direction to forward, through moveForward()
+S Key - Move Character Back and  sets character direction to back, through moveBack()
+A Key - Move Character Left and sets character direction to left, through moveLeft()
+D Key - Move Character Right and sets character direction to right, through moveRight()
 
 Interactions
 
 The character will be able to interact with objects such as chests and doors.
 Interactions will work by the character being a certain distance to the object and pressing an action key.
+Chests would be opened using openChest()
+Doors would be opened using openDoor()
 
 
 

@@ -1,9 +1,8 @@
 Character Movement
 
 W Key - Move Character Forward and sets character direction to forward, through moveForward()
-S Key - Move Character Back and  sets character direction to back, through moveBack()
-A Key - Move Character Left and sets character direction to left, through moveLeft()
-D Key - Move Character Right and sets character direction to right, through moveRight()
+A Key - Rotate character left, turnLeft()
+D Key - Rotate character right, turnRight()
 
 Interactions
 

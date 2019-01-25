@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     private float speed= 5.0f;
+    private float turningSpeed = 5.0f;
 
     // Use this for initialization
     void Start () {
@@ -14,7 +15,7 @@ public class PlayerControl : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
         moveForward(speed);
-        turnLeft();
+        turnRight(turningSpeed);
       // moveLeft(speed);
        // moveRight(speed*-1);
         //moveBack(speed);
@@ -52,14 +53,14 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     private void turnLeft(float turningSpeed)
     {
-        transform.Rotate(Vector3.up, 5 * Time.deltaTime);
+        transform.Rotate(Vector3.up, turningSpeed * Time.deltaTime);
     }
 
     /// <summary>
     /// Rotates the character right
     /// </summary>
-    private void turnRight(string turningSpeed)
+    private void turnRight(float turningSpeed)
     {
-        throw new System.NotImplementedException();
+        transform.Rotate(Vector3.down, turningSpeed * Time.deltaTime);
     }
 }

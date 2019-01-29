@@ -4,23 +4,35 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    private float speed= 5.0f;
-    private float turningSpeed = 5.0f;
+    private float speed= 15.0f;
+    private float turningSpeed = 40.0f;
 
     // Use this for initialization
     void Start () {
+
+        
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        moveForward(speed);
-        turnRight(turningSpeed);
-      // moveLeft(speed);
-       // moveRight(speed*-1);
-        //moveBack(speed);
         Camera.main.transform.position = transform.position + new Vector3(0, 3, -10);
-	}
+
+        if(Input.GetKey(KeyCode.W))
+        {
+            moveForward(speed);
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            turnLeft(turningSpeed);
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            turnRight(turningSpeed);
+        }
+    }
 
     /// <summary>
     /// Changes direction and moves the character forward
@@ -28,7 +40,6 @@ public class PlayerControl : MonoBehaviour
     /// <param name="speed">Speed for movement</param>
     private void moveForward(float speed)
     {
-        //transform.position += speed * Vector3.forward * Time.deltaTime;
         transform.position += speed * transform.forward * Time.deltaTime;
     }
 

@@ -1,0 +1,30 @@
+Each NPC will have their own set of stats 
+Stats will consist of:
+- HP
+- MP
+- Strength
+- Defence
+- Intelligence
+- SpecialDefence
+- Agility
+- Luck
+
+HP is the number of hitpoints the NPC will have
+MP is the number of magic points the NPC will have
+Strength will determine the damage output of physical attacks
+Defence will determine how much damage the NPC takes from physical attacks
+Intelligence will determine the damage output of special abilities
+Special Defence will determine how much damage the NPC takes from special abilities
+Agility will determine how likely a character can escape from battles (and the number of turns they get?)
+Luck will determine the chance of landing a critical hit for physical attacks
+Each character will also have a level
+Each character will have a name
+
+The Main Characters stats will increase as they level up.
+
+HP and MP will cap out 999
+
+Levelling will work as follows
+Different stats will increase at different levels
+E.g One level up would increase HP, Strength, Special Defence, and Agility
+While a different level up would increase MP, Defence, Intelligence and Luck

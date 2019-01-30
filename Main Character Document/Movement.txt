@@ -11,5 +11,12 @@ Interactions will work by the character being a certain distance to the object a
 Chests would be opened using openChest()
 Doors would be opened using openDoor()
 
+When the character moves their steps will be counted and stored in
+a variable this value will be used for triggering random encounters.
+The value will be reset to 0 after a battle.
+A random number will be generated to determine the number of
+steps that are needed to trigger are random encounter. This value
+will be randomised everytime the step counter is reset. 
+
 
 

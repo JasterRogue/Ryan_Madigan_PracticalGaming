@@ -5,12 +5,13 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     private float speed= 15.0f;
-    private float turningSpeed = 40.0f;
-
+    private float turningSpeed = 90.0f;
+    private Animator animate;
     // Use this for initialization
     void Start () {
 
-        
+        animate = GetComponentInChildren<Animator>();
+        if (animate) print("Found"); else print("NO Animator");
 		
 	}
 	
@@ -20,8 +21,11 @@ public class PlayerControl : MonoBehaviour
 
         if(Input.GetKey(KeyCode.W))
         {
+            animate.SetBool("IsRunning", true);
             moveForward(speed);
         }
+        else
+            animate.SetBool("IsRunning", false);
 
         if (Input.GetKey(KeyCode.A))
         {

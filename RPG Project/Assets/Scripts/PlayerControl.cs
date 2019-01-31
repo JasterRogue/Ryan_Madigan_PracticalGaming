@@ -7,6 +7,7 @@ public class PlayerControl : MonoBehaviour
     private float speed= 15.0f;
     private float turningSpeed = 90.0f;
     private Animator animate;
+    public int stepCount=0; // Used to count number of steps player has taken for triggering random encounters
     // Use this for initialization
     void Start () {
 
@@ -23,6 +24,7 @@ public class PlayerControl : MonoBehaviour
         {
             animate.SetBool("IsRunning", true);
             moveForward(speed);
+            stepCount++;
         }
         else
             animate.SetBool("IsRunning", false);

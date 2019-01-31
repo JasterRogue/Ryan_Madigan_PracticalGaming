@@ -1,8 +1,7 @@
 fileFormatVersion: 2
 guid: 8a2d23da643cb0d4a9ca6c6f1fffa66b
-timeCreated: 18446744011573954816
 ModelImporter:
-  serializedVersion: 22
+  serializedVersion: 23
   fileIDToRecycleName:
     100000: debris
     100002: debris_001
@@ -6297,7 +6296,378 @@ ModelImporter:
     4302504: prop_laserFence_B_002
     4302506: prop_laserFence_B_004
     9500000: //RootNode
-  externalObjects: {}
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decal_a7_mat
+    second: {fileID: 2100000, guid: 1ef81b3d6d49b9248aee6ec9ab59c49a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decal_bulletinBoard_mat
+    second: {fileID: 2100000, guid: 73a868285463aa049997c12d60af2803, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decal_danger_mat
+    second: {fileID: 2100000, guid: 98c3f17bec5f3b94ab9dd4335715ff85, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decal_drinkMachine_mat
+    second: {fileID: 2100000, guid: 21cd347f9c768cb42b095143acb0c094, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decal_gunRack_mat
+    second: {fileID: 2100000, guid: 9210c0b81bf472a4c9376beb0de86946, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decal_h1_mat
+    second: {fileID: 2100000, guid: c9995f77217cacf46a51d852fedefcce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decal_keepClear_mat
+    second: {fileID: 2100000, guid: b42218ea8de442941a9700ecfea75059, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decal_lift_mat
+    second: {fileID: 2100000, guid: 1cfce207550eddc458df25cf66f28c4d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decal_map_mat
+    second: {fileID: 2100000, guid: 3555b19a3e738544fbf255e68f5cd6c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decal_notes_mat
+    second: {fileID: 2100000, guid: 363869f2b1e181444b440a23f3ad798b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decal_security_mat
+    second: {fileID: 2100000, guid: 816429dea9287e94cafd69226b140ebf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decal_shutter_mat
+    second: {fileID: 2100000, guid: bb177aca2b9b0644f9b868b8675fac9a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decal_simulation_stealth_mat
+    second: {fileID: 2100000, guid: 19d0dbcae576cac45ad48e91478114f4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decal_subLevel04_mat
+    second: {fileID: 2100000, guid: ceb777118dc220d4f9bdc5479a7c4237, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decal_terminal_mat
+    second: {fileID: 2100000, guid: 394a0d977740a1a45b533691cb4734ab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_airConditioner_mat
+    second: {fileID: 2100000, guid: 1f2a6ee10cad546429f0464374033e94, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_antenna_mat
+    second: {fileID: 2100000, guid: e9fa1cca94e11a74a8fbea4cf6d698f3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_barrel_body_L01_mat
+    second: {fileID: 2100000, guid: 40917df05ecd20b4f8686c255f844ada, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_barrel_trim_L01_mat
+    second: {fileID: 2100000, guid: d03b77003a09376459d3c220f8db3067, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_battleBus_appendages_mat
+    second: {fileID: 2100000, guid: 3fc68f1cc7d271844b65edb28f7460a7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_battleBus_barbedWire_mat
+    second: {fileID: 2100000, guid: ea7487c313522784483adb832fe0eb92, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_battleBus_blackMetal_mat
+    second: {fileID: 2100000, guid: 12df5d5c4c1cf7049b9151236e187ecb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_battleBus_body_mat
+    second: {fileID: 2100000, guid: 3156f69eac92d514b91d6f92e44663b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_battleBus_boxes_mat
+    second: {fileID: 2100000, guid: a6f79878be529c1418629e946f61560b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_battleBus_canister_mat
+    second: {fileID: 2100000, guid: 5b1d1890232b6674e826416c49d62a60, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_battleBus_carpet_mat
+    second: {fileID: 2100000, guid: 3c12c37caf4e72b4085b416d5c503890, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_battleBus_crates_mat
+    second: {fileID: 2100000, guid: 11d74de4042cea448ab26dcfe2b34525, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_battleBus_lights_fx
+    second: {fileID: 2100000, guid: 72e6ed01558f4ab4599f4f6c97a06098, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_battleBus_lights_mat
+    second: {fileID: 2100000, guid: 3b8aa47237fff3a49b9593cc6bb5084a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_battleBus_sacks_mat
+    second: {fileID: 2100000, guid: c059d1464d1168d4892390531e7da677, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_battleBus_tubes_mat
+    second: {fileID: 2100000, guid: dbf8f9b99f6867448a86d6d7cc9dfcef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_battleBus_tv_fx
+    second: {fileID: 2100000, guid: deba7d183bb7f364980bdb35e5911c37, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_battleBus_tv_mat
+    second: {fileID: 2100000, guid: e7b96f193708f3843b39fa5900a0a159, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_battleBus_wheels_mat
+    second: {fileID: 2100000, guid: 63dfe39753b0e494e96d87575df323f6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_ceilingJoint_mat
+    second: {fileID: 2100000, guid: 12f8c0703b5f0ac48a9810a3b625a3d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_eyelet_mat
+    second: {fileID: 2100000, guid: c89e37618dab35a499c131956ba8b944, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_fan_mat
+    second: {fileID: 2100000, guid: 146cd49cbd4d371459bcfeafbca8bd70, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_faucet_mat
+    second: {fileID: 2100000, guid: 6c39f8c7024977d459b6142832824cdf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_hatch_A_mat
+    second: {fileID: 2100000, guid: b129df5cc8b0d1941a114b48934480e6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_laserFence_A_mat
+    second: {fileID: 2100000, guid: 77ba484856752324f820010cda33d84a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_laserFence_B_mat
+    second: {fileID: 2100000, guid: 300185b2a1606ec40b08b26e6a3fa8e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_light_bracket_mat
+    second: {fileID: 2100000, guid: dd2106c3fed834f4caa7be59c9e42d70, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_megaphone_mat
+    second: {fileID: 2100000, guid: 453dbb9d1c467bd4abe5f6fba8b81dc7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_pipeBracket_mat
+    second: {fileID: 2100000, guid: b62690d438bb37c4daeabca818306528, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_pipeJoint_A_mat
+    second: {fileID: 2100000, guid: f7bcf86952f5edb4b9e829262965817c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_pipeJoint_B_mat
+    second: {fileID: 2100000, guid: cd447e756fd56294ca82d0aa68c559a7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_support_foot_mat
+    second: {fileID: 2100000, guid: 4a1c9c554e9ee76409d2dc8586a63a63, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_table_mat
+    second: {fileID: 2100000, guid: f5602815bab5ddd43be7af62140a063d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_telegraphPole_mat
+    second: {fileID: 2100000, guid: 7077518ca21841948bf429ec52fec181, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_trafficCone_mat
+    second: {fileID: 2100000, guid: 836d710430f1d4244b1455bf0c8da4e7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_ventUnit_mat
+    second: {fileID: 2100000, guid: b4553f8c5955068459feee6c4071ea3d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_wallPanel_A01_mat
+    second: {fileID: 2100000, guid: 058892377a13b944f82dacad0b08ef91, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_wallPanel_A02_mat
+    second: {fileID: 2100000, guid: 9a59e9e99d1e22b468c1e15e973fa167, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_wallPanel_C01_mat
+    second: {fileID: 2100000, guid: 1be88908997938045b8afc59f1b3d158, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_wallPanel_C02_mat
+    second: {fileID: 2100000, guid: d60b72fc754f0cd4e8372624fe668e48, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_wallPanel_D02_mat
+    second: {fileID: 2100000, guid: 860257c73b6fa094eb78b68d58169beb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_washer_mat
+    second: {fileID: 2100000, guid: edb52b6208e6f3d49aa9d6c0efe6f840, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tile_asphalt_mat
+    second: {fileID: 2100000, guid: 45f66b5eede9c3140a5b3076e9cba4b0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tile_duct_mat
+    second: {fileID: 2100000, guid: ea2c15f5afdac7d44b4c71379dbdd52b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tile_floor_concreteSlabs_mat
+    second: {fileID: 2100000, guid: 91131ff3b5aae474db5b7b6bf23bec3f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tile_floor_rubber_mat
+    second: {fileID: 2100000, guid: 3069f7d3321c64f46b7c7716c4d1f084, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tile_floor_simulation_mat
+    second: {fileID: 2100000, guid: c2906c6192214ca47ac28641f9f1b37a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tile_floor_tiled_A_mat
+    second: {fileID: 2100000, guid: 751e1aef987c9b543a67b8b9a01237f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tile_footer_mat
+    second: {fileID: 2100000, guid: 50740641e5aa2a040a84d7106ecc887e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tile_gutter_mat
+    second: {fileID: 2100000, guid: 80c499e6aca373e43a06580467562e8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tile_handrail_yellow_mat
+    second: {fileID: 2100000, guid: 015ea1239b54b434592a276ad217c423, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tile_pipe_grey_mat
+    second: {fileID: 2100000, guid: 1aefd6bdc1855dd4bbe2f6720257d8af, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tile_pipe_red_mat
+    second: {fileID: 2100000, guid: d1247cb1131e77a4dbebb95dc0059ca9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tile_support_upright_mat
+    second: {fileID: 2100000, guid: c5b2ee3a4ba1ce94f8615c9e69b9260a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tile_tube_ribbed_mat
+    second: {fileID: 2100000, guid: 972fe9d9ba911914fb6950d42bce1d75, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tile_wallPanel_B01_mat
+    second: {fileID: 2100000, guid: 6c704ff352317ea47bc6cb3ae1351a1e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tile_wall_concrete_A_mat
+    second: {fileID: 2100000, guid: 716c61b67ec60bc4ea5454b1e1033c45, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tile_wall_concrete_B_mat
+    second: {fileID: 2100000, guid: 36e12ef8889492843bf1b0b3b1c49932, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tile_wireFence_mat
+    second: {fileID: 2100000, guid: b065262c11aa8ae41a546d88ef259e82, type: 2}
   materials:
     importMaterials: 1
     materialName: 1
@@ -6316,6 +6686,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -6330,6 +6701,7 @@ ModelImporter:
     globalScale: 0.01
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
     importVisibility: 0
     importBlendShapes: 1
     importCameras: 0
@@ -6340,16 +6712,23 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 0
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 4
     normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
   importAnimation: 0
   copyAvatar: 0
   humanDescription:
@@ -6364,7 +6743,6 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 0

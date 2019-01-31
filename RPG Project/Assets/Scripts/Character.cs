@@ -6,8 +6,10 @@ public class Character : MonoBehaviour {
 
     private string characterName;
     private int level;
-    private int HP;
-    private int MP;
+    private int maxHP;//max value only
+    private int maxMP;//max vaule only
+    private int HP;//current hp value
+    private int MP;//current mp value
     private int strength;
     private int defence;
     private int intelligence;
@@ -20,6 +22,8 @@ public class Character : MonoBehaviour {
     {
         characterName = "";
         level = 0;
+        maxHP = 1;
+        maxMP = 1;
         HP = 0;
         MP = 0;
         strength = 0;
@@ -39,6 +43,16 @@ public class Character : MonoBehaviour {
     public void setLevel(int level)
     {
         this.level = level;
+    }
+
+    public void setMaxHP(int maxHP)
+    {
+        this.maxHP = maxHP;
+    }
+
+    public void setMaxMP(int maxMP)
+    {
+        this.maxMP = maxMP;
     }
 
     public void setHP(int hp)
@@ -91,6 +105,16 @@ public class Character : MonoBehaviour {
     public int getLevel()
     {
         return level;
+    }
+
+    public int getMaxHP()
+    {
+        return maxHP;
+    }
+
+    public int getMaxMP()
+    {
+        return maxMP;
     }
 
     public int getHP()

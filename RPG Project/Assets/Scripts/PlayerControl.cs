@@ -12,7 +12,10 @@ public class PlayerControl : MonoBehaviour
     void Start () {
 
         animate = GetComponentInChildren<Animator>();
-        if (animate) print("Found"); else print("NO Animator");
+        if (animate)
+            print("Found");
+        else
+            print("NO Animator");
 		
 	}
 	

@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Character : MonoBehaviour {
 
-    private string characterName;
-    private int level;
-    private int maxHP;//max value only
-    private int maxMP;//max vaule only
-    private int HP;//current hp value
-    private int MP;//current mp value
-    private int strength;
-    private int defence;
-    private int intelligence;
-    private int specialDefence;
-    private int agility;
-    private int luck;
+    public string characterName;
+    public int level;
+    public int maxHP;//max value only
+    public int maxMP;//max vaule only
+    public int HP;//current hp value
+    public int MP;//current mp value
+    public int strength;
+    public int defence;
+    public int intelligence;
+    public int specialDefence;
+    public int agility;
+    public int luck;
 
     //Constructors
     public Character()

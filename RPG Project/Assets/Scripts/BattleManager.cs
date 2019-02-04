@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BattleManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class BattleManager : MonoBehaviour
     PlayerControl pc;//access to player control script
     Player p;//access to player script
     int stepsToBattle;
+    int currentExp = 0;
+    int expNeededToLevelUp = 60;
 
     // Start is called before the first frame update
     void Start()
@@ -29,18 +32,32 @@ public class BattleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        p.levelUp();
+       
         if(pc.stepCount>= stepsToBattle)
         {
             //Code to start a random battle goes here
             print("Battle has occured");
+            //SceneManager.LoadScene("Battle Scene");
             stepsToBattle = Random.Range(150,301);
+            currentExp += 30;
+            checkForLevelUp();
             pc.stepCount = 0;
             print("Steps reset");
-            
-
-        }//end of if stepCount > steps to battle
-      
+            p.recover();
+        }//end of if stepCount > steps to battle  
         
     }//end of update()
+
+    public void checkForLevelUp()
+    {
+        if (currentExp >= expNeededToLevelUp && p.getLevel()<99)
+        {
+            print("Level Up");
+            int lastExpNeeded = expNeededToLevelUp;
+            expNeededToLevelUp = lastExpNeeded + lastExpNeeded / 4;
+            p.levelUp();
+        }//end of if exp needed
+    }
+
+  
 }

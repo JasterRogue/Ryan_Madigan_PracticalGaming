@@ -74,4 +74,12 @@ public class Player : Character {
 
         }//end of if(level<99)
     }//end of levelUp()
+
+    public void recover()
+    {
+        //recovers players hp and mp 
+        setHP(getMaxHP());
+        setMP(getMaxMP());
+
+    }
 }//end of class

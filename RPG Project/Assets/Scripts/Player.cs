@@ -12,12 +12,12 @@ public class Player : Character {
         setMaxMP(30);
         setHP(getMaxHP());
         setMP(getMaxMP());
-        setStrength(6);
-        setDefence(4);
-        setIntelligence(3);
-        setSpecialDefence(4);
-        setAgility(5);
-        setLuck(2);
+        setStrength(12);
+        setDefence(10);
+        setIntelligence(7);
+        setSpecialDefence(9);
+        setAgility(11);
+        setLuck(5);
     }//end of player()
     
    
@@ -43,14 +43,14 @@ public class Player : Character {
         {
             setLevel(getLevel() + 1);
             //HP will increase by random amount 
-            hpToIncrease = Random.Range(11, 14);
+            hpToIncrease = Random.Range(12, 18);
             setMaxHP(getMaxHP() + hpToIncrease);
             if (getMaxHP() > 999)
             {
                 setMaxHP(999);
             }
             //MP will increase by a random amount
-            mpToIncrease = Random.Range(5, 9);
+            mpToIncrease = Random.Range(7, 10);
             setMaxMP(getMaxMP() + mpToIncrease);
 
             if (getLevel() % 2 == 0)

@@ -57,7 +57,8 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     public void openChest()
     {
-        
+        animate.SetBool("isOpeningChest", true);
+
     }
 
     /// <summary>

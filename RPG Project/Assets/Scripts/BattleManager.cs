@@ -32,7 +32,7 @@ public class BattleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        p.levelUp();
+       
        
         if(pc.stepCount>= stepsToBattle)
         {

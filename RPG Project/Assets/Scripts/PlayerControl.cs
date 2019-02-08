@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    private float speed= 15.0f;
+    private float speed= 10.0f;
     private float turningSpeed = 90.0f;
     private Animator animate;
     public int stepCount=0; // Used to count number of steps player has taken for triggering random encounters
@@ -57,7 +57,7 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     public void openChest()
     {
-        animate.SetBool("isOpeningChest", true);
+        //animate.SetBool("isOpeningChest", true);
 
     }
 

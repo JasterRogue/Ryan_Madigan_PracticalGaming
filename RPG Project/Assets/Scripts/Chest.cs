@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Chest : MonoBehaviour {
 
@@ -11,7 +12,7 @@ public class Chest : MonoBehaviour {
     string[] items = new string []{"Attack Boost","Thera Leaf","Mana Leaf"};
     public string itemInChest;
     Inventory inventory;
-    
+    public Text itemText;
    
 
 	// Use this for initialization
@@ -56,6 +57,7 @@ public class Chest : MonoBehaviour {
                 gameObject.GetComponent<MeshRenderer>().material = mat;
                 
             }
+            setAndShowText();
             print("Im fading");
             //inventory.inventoryItems.Add(itemInChest);
             GameObject.Destroy(gameObject);
@@ -65,5 +67,10 @@ public class Chest : MonoBehaviour {
     public void generateItemToBeInChest()
     {
         itemInChest = items[Random.Range(0, 4)];
+    }
+
+    public void setAndShowText()
+    {
+        itemText.text = "Found a " + itemInChest;
     }
 }

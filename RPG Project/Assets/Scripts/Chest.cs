@@ -12,7 +12,8 @@ public class Chest : MonoBehaviour {
     string[] items = new string []{"Attack Boost","Thera Leaf","Mana Leaf"};
     public string itemInChest;
     Inventory inventory;
-    public Text itemText;
+    TextDisplay mtd;
+    
    
 
 	// Use this for initialization
@@ -23,8 +24,13 @@ public class Chest : MonoBehaviour {
 
         GameObject playerControl = GameObject.Find("CharacterObject");
         pc = playerControl.GetComponent<PlayerControl>();
+
         mat = gameObject.GetComponent<MeshRenderer>().material;
+
         generateItemToBeInChest();
+
+        GameObject myTextDisplay = GameObject.Find("TextBox");
+        mtd = myTextDisplay.GetComponent<TextDisplay>();
 
         inventory = GetComponent<Inventory>();
 
@@ -57,8 +63,9 @@ public class Chest : MonoBehaviour {
                 gameObject.GetComponent<MeshRenderer>().material = mat;
                 
             }
-            setAndShowText();
+            
             print("Im fading");
+            mtd.setAndShowText();
             //inventory.inventoryItems.Add(itemInChest);
             GameObject.Destroy(gameObject);
         }    
@@ -69,8 +76,5 @@ public class Chest : MonoBehaviour {
         itemInChest = items[Random.Range(0, 4)];
     }
 
-    public void setAndShowText()
-    {
-        itemText.text = "Found a " + itemInChest;
-    }
+    
 }

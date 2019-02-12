@@ -6,16 +6,17 @@ using UnityEngine.UI;
 public class TextDisplay : MonoBehaviour {
 
     public Text itemText;
-    Chest tdc;
     Chest myChest;
 
 
     // Use this for initialization
     void Start ()
     {
-       // GameObject textDisplayChest = GameObject.Find("Chest");
-       // tdc = textDisplayChest.GetComponent<Chest>();
-         myChest = gameObject.GetComponent<Chest>();
+        myChest = GameObject.Find("TestChest").GetComponent<Chest>();
+        itemText = GameObject.Find("TextBox").GetComponentInChildren<Text>();
+
+        itemText.gameObject.SetActive(false);
+       // itemText.GetComponent<Text>().enabled = false;
 
     }
 	
@@ -27,6 +28,12 @@ public class TextDisplay : MonoBehaviour {
 
     public void setAndShowText()
     {
+        itemText.gameObject.SetActive(true); 
         itemText.text = "Found a " + myChest.itemInChest;
+    }
+
+    public void itemTextHide()
+    {
+        itemText.gameObject.SetActive(false);
     }
 }

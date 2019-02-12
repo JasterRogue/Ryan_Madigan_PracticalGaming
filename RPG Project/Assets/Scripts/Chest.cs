@@ -13,6 +13,7 @@ public class Chest : MonoBehaviour {
     public string itemInChest;
     Inventory inventory;
     TextDisplay mtd;
+    public float itemTextTime = 0.0f;
     
    
 
@@ -29,10 +30,9 @@ public class Chest : MonoBehaviour {
 
         generateItemToBeInChest();
 
-        GameObject myTextDisplay = GameObject.Find("TextBox");
-        mtd = myTextDisplay.GetComponent<TextDisplay>();
+        mtd = GameObject.Find("TextBox").GetComponent<TextDisplay>();
 
-        inventory = GetComponent<Inventory>();
+        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
 
 
     }//end of start()
@@ -55,6 +55,7 @@ public class Chest : MonoBehaviour {
         if(playerToChestDistance <= 2 && Input.GetKey(KeyCode.E))
         {
             //pc.openChest();
+            startTime();
             while (mat.color.a > 0)
             {
                 Color newColor = mat.color;
@@ -75,6 +76,23 @@ public class Chest : MonoBehaviour {
     {
         itemInChest = items[Random.Range(0, 4)];
     }
+
+    public void startTime()
+    {
+        itemTextTime = 5.0f;
+
+        while(itemTextTime > 0.0f)
+        {
+            itemTextTime -= Time.deltaTime;
+        }
+
+        if(itemTextTime <= 0.0f)
+        {
+            mtd.itemTextHide();
+        }
+    }
+
+    
 
     
 }

@@ -11,7 +11,7 @@ public class Chest : MonoBehaviour {
     private Material mat;
     string[] items = new string []{"Attack Boost","Thera Leaf","Mana Leaf"};
     public string itemInChest;
-    Inventory inventory;
+    Inventory myInventory;
     TextDisplay mtd;
     public float itemTextTime = 0.0f;
     
@@ -32,7 +32,7 @@ public class Chest : MonoBehaviour {
 
         mtd = GameObject.Find("TextBox").GetComponent<TextDisplay>();
 
-        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+       //myInventory = GameObject.Find("Inventory").GetComponent<Inventory>();
 
 
     }//end of start()
@@ -40,6 +40,7 @@ public class Chest : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+
         checkDistanceToPlayer();
 	}//end of update()
 
@@ -55,7 +56,7 @@ public class Chest : MonoBehaviour {
         if(playerToChestDistance <= 2 && Input.GetKey(KeyCode.E))
         {
             //pc.openChest();
-            startTime();
+
             while (mat.color.a > 0)
             {
                 Color newColor = mat.color;
@@ -77,20 +78,6 @@ public class Chest : MonoBehaviour {
         itemInChest = items[Random.Range(0, 4)];
     }
 
-    public void startTime()
-    {
-        itemTextTime = 5.0f;
-
-        while(itemTextTime > 0.0f)
-        {
-            itemTextTime -= Time.deltaTime;
-        }
-
-        if(itemTextTime <= 0.0f)
-        {
-            mtd.itemTextHide();
-        }
-    }
 
     
 

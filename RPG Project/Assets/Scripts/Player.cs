@@ -2,7 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Character { 
+public class Player : Character {
+
+    public bool isPlayerTurn;
+    int damage;
+    int chanceOfCritical;
+    int variedDamage;
+    int variedPercent;
+
+    Enemy enemyStats;
 
     public Player()
     {
@@ -23,7 +31,9 @@ public class Player : Character {
    
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
+        enemyStats = GameObject.Find("CubeOfDestruction").GetComponent<Enemy>();
 
     
 		
@@ -81,5 +91,28 @@ public class Player : Character {
         setHP(getMaxHP());
         setMP(getMaxMP());
 
+    }
+
+    public void playerTurn()
+    {
+        isPlayerTurn = true;
+
+        //calculates  the damage output
+        damage = ((getStrength() * 2) - enemyStats.getDefence());
+        chanceOfCritical = Random.Range(1, 101);
+
+        if (damage < 1)
+        {
+            //opponents defence could be so high that the damage ends up as negative number
+            damage = 1;
+        }
+
+        if (chanceOfCritical <= getLuck())
+        {
+            damage = (damage + (damage / 2));
+        }
+        variedPercent = Random.Range(0, 21);
+        variedDamage = ((damage * variedPercent) / 100);
+        damage = damage + variedDamage;
     }
 }//end of class

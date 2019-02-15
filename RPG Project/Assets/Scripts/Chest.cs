@@ -75,7 +75,7 @@ public class Chest : MonoBehaviour {
 
     public void generateItemToBeInChest()
     {
-        itemInChest = items[Random.Range(0, 4)];
+        itemInChest = items[Random.Range(0, 3)];
     }
 
 

@@ -14,21 +14,27 @@ public class BattleText : MonoBehaviour {
     Player myPlayer;
     int hpUnder30Percent;
     int mpUnder30Percent;
+    Button[] allButttons;
+
 
 	// Use this for initialization
 	void Start ()
     {
         myPlayer = GameObject.Find("char_ethan").GetComponent<Player>();
-
+        allButttons = FindObjectsOfType<Button>();
+        allButttons[0].onClick.AddListener(Attack);
         setUpStats();
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if(myPlayer.getHP() < hpUnder30Percent)
+
+   
+
+        if (myPlayer.getHP() < hpUnder30Percent)
         {
-            currentHPText.color = new Color(233,255,0);
+            currentHPText.color = new Color(233, 255, 0);
         }
 
         else
@@ -38,7 +44,7 @@ public class BattleText : MonoBehaviour {
 
         if (myPlayer.getMP() < mpUnder30Percent)
         {
-            currentMPText.color = new Color(233,255,0);
+            currentMPText.color = new Color(233, 255, 0);
         }
 
         else
@@ -46,16 +52,33 @@ public class BattleText : MonoBehaviour {
             currentMPText.color = new Color(255.0f, 255.0f, 255.0f);
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             myPlayer.setHP(myPlayer.getHP() - 40);
             myPlayer.setMP(myPlayer.getMP() - 23);
             setUpStats();
         }
 
+        //if(myPlayer.isPlayerTurn)
+        //{
+        //    GUI.enabled = true;
+        //}
+
+        //else
+        //{
+        //    GUI.enabled = false;
+
+        //}
 
 
     }
+
+    public void Attack()
+    {
+
+        print("Hello");
+    }
+
 
     public void setUpStats()
     {

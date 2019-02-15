@@ -12,7 +12,8 @@ public class BattleManager : MonoBehaviour
      related stuff*/
 
     PlayerControl pc;//access to player control script
-    Player p;//access to player script
+    Player player;//access to player script
+    Enemy enemy;//access to enemy script
     int stepsToBattle;
     int currentExp = 0;
     int expNeededToLevelUp = 60;
@@ -22,7 +23,9 @@ public class BattleManager : MonoBehaviour
     {
         GameObject playerControl = GameObject.Find("char_ethan");
         pc = playerControl.GetComponent<PlayerControl>();
-        p = FindObjectOfType<Player>();
+        player = FindObjectOfType<Player>();
+
+        enemy = GameObject.Find("CubeOfDestruction").GetComponent<Enemy>();
 
         stepsToBattle = Random.Range(150, 301);
         print(stepsToBattle);
@@ -43,20 +46,18 @@ public class BattleManager : MonoBehaviour
             currentExp += 30;
             checkForLevelUp();
             pc.stepCount = 0;
-            print("Steps reset");
-            p.recover();
         }//end of if stepCount > steps to battle  
         
     }//end of update()
 
     public void checkForLevelUp()
     {
-        if (currentExp >= expNeededToLevelUp && p.getLevel()<99)
+        if (currentExp >= expNeededToLevelUp && player.getLevel()<99)
         {
             print("Level Up");
             int lastExpNeeded = expNeededToLevelUp;
             expNeededToLevelUp = lastExpNeeded + lastExpNeeded / 4;
-            p.levelUp();
+            player.levelUp();
         }//end of if exp needed
     }
 

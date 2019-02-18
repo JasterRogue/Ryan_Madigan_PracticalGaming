@@ -13,6 +13,7 @@ public class BattleManager : MonoBehaviour
 
     PlayerControl pc;//access to player control script
     Player player;//access to player script
+    BattleText myBattleText;
     Enemy enemy;//access to enemy script
     int stepsToBattle;
     int currentExp = 0;
@@ -21,8 +22,8 @@ public class BattleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject playerControl = GameObject.Find("char_ethan");
-        pc = playerControl.GetComponent<PlayerControl>();
+        myBattleText = GameObject.Find("BattleGUI").GetComponent<BattleText>();
+        pc = GameObject.Find("char_ethan").GetComponent<PlayerControl>();
         player = FindObjectOfType<Player>();
 
         enemy = GameObject.Find("CubeOfDestruction").GetComponent<Enemy>();
@@ -34,10 +35,8 @@ public class BattleManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-       
-       
-        if(pc.stepCount>= stepsToBattle)
+    {     
+        /*if(pc.stepCount>= stepsToBattle)
         {
             //Code to start a random battle goes here
             print("Battle has occured");
@@ -46,8 +45,7 @@ public class BattleManager : MonoBehaviour
             currentExp += 30;
             checkForLevelUp();
             pc.stepCount = 0;
-        }//end of if stepCount > steps to battle  
-        
+        }//end of if stepCount > steps to battle  */        
     }//end of update()
 
     public void checkForLevelUp()
@@ -60,6 +58,19 @@ public class BattleManager : MonoBehaviour
             player.levelUp();
         }//end of if exp needed
     }
+
+    public void playerHasAttacked()
+    {
+        player.playerAttack();
+
+        enemy.enemyTurn();
+
+        myBattleText.setUpStats();
+
+        
+    }
+
+
 
   
 }

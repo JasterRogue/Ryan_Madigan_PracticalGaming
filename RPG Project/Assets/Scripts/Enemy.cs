@@ -72,7 +72,9 @@ public class Enemy : Character {
         variedPercent = Random.Range(0, 21);
         variedDamage = ((damage * variedPercent) / 100);
         damage = damage + variedDamage;
-       // print(damage);
+        print("Enemy:  " + damage);
+
+        playerStats.isPlayerTurn = true;
 
 
 

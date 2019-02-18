@@ -96,7 +96,10 @@ public class Player : Character {
     public void playerTurn()
     {
         isPlayerTurn = true;
+    }
 
+    public void playerAttack()
+    {
         //calculates  the damage output
         damage = ((getStrength() * 2) - enemyStats.getDefence());
         chanceOfCritical = Random.Range(1, 101);
@@ -114,5 +117,7 @@ public class Player : Character {
         variedPercent = Random.Range(0, 21);
         variedDamage = ((damage * variedPercent) / 100);
         damage = damage + variedDamage;
+        print(damage);
+
     }
 }//end of class

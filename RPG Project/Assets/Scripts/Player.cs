@@ -119,5 +119,7 @@ public class Player : Character {
         damage = damage + variedDamage;
         print(damage);
 
+        enemyStats.setHP(enemyStats.getHP() - damage);
+
     }
 }//end of class

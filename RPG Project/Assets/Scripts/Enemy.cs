@@ -53,28 +53,38 @@ public class Enemy : Character {
 
     public void enemyTurn()
     {
-        playerStats.isPlayerTurn = false;
 
-        //calculates  the damage output
-        damage = ((getStrength() * 2) - playerStats.getDefence());
-        chanceOfCritical = Random.Range(1, 101);
-
-        if(damage < 1)
+        if (getHP() > 1)
         {
-            //opponents defence could be so high that the damage ends up as negative number
-            damage = 1;
+            playerStats.isPlayerTurn = false;
+
+            //calculates  the damage output
+            damage = ((getStrength() * 2) - playerStats.getDefence());
+            chanceOfCritical = Random.Range(1, 101);
+
+            if (damage < 1)
+            {
+                //opponents defence could be so high that the damage ends up as negative number
+                damage = 1;
+            }
+
+            if (chanceOfCritical <= getLuck())
+            {
+                damage = (damage + (damage / 2));
+            }
+            variedPercent = Random.Range(0, 21);
+            variedDamage = ((damage * variedPercent) / 100);
+            damage = damage + variedDamage;
+            print("Enemy:  " + damage);
+            playerStats.setHP(playerStats.getHP() - damage);
+
+            playerStats.isPlayerTurn = true;
         }
 
-        if(chanceOfCritical <= getLuck())
+        else
         {
-            damage = (damage + (damage / 2));
+            GameObject.Destroy(gameObject);
         }
-        variedPercent = Random.Range(0, 21);
-        variedDamage = ((damage * variedPercent) / 100);
-        damage = damage + variedDamage;
-        print("Enemy:  " + damage);
-
-        playerStats.isPlayerTurn = true;
 
 
 

@@ -36,16 +36,24 @@ public class BattleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {     
-        /*if(pc.stepCount>= stepsToBattle)
+        if(pc.stepCount>= stepsToBattle)
         {
             //Code to start a random battle goes here
             print("Battle has occured");
-            //SceneManager.LoadScene("Battle Scene");
-            stepsToBattle = Random.Range(150,301);
+            myBattleText.setUpStats();
+            SceneManager.LoadScene("Battle Scene");
+            
+        }//end of if stepCount > steps to battle  */    
+        
+
+        if(enemy.getHP() < 1)
+        {
+            SceneManager.LoadScene("Test Scene");
+            stepsToBattle = Random.Range(150, 301);
             currentExp += 30;
             checkForLevelUp();
             pc.stepCount = 0;
-        }//end of if stepCount > steps to battle  */        
+        }
     }//end of update()
 
     public void checkForLevelUp()

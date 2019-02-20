@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class PlayerControl : MonoBehaviour
     private float turningSpeed = 90.0f;
     private Animator animate;
     public int stepCount=0; // Used to count number of steps player has taken for triggering random encounters
+    private int stepCountdown;
+
     // Use this for initialization
     void Start () {
 
@@ -41,6 +44,14 @@ public class PlayerControl : MonoBehaviour
         {
             turnRight(turningSpeed);
         }
+
+        if (stepCount > stepCountdown)
+            Global.manager.StepCountReached();
+    }
+
+    internal void StepsToNextBattleIs(int stepsToBattle)
+    {
+        stepCountdown = stepsToBattle;
     }
 
     /// <summary>

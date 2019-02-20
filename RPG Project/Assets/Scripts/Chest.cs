@@ -5,15 +5,16 @@ using UnityEngine.UI;
 
 public class Chest : MonoBehaviour {
 
-    PlayerControl pc;
+    PlayerControl myPlayerControl;
     GameObject player;
     Transform playerTransform;
     private Material mat;
     string[] items = new string []{"Attack Boost","Thera Leaf","Mana Leaf"};
     public string itemInChest;
     Inventory myInventory;
-    TextDisplay mtd;
+    TextDisplay myTextDisplay;
     public float itemTextTime = 0.0f;
+    public Transform chest;
     
    
 
@@ -24,15 +25,18 @@ public class Chest : MonoBehaviour {
         playerTransform = player.GetComponent<Transform>();
 
         GameObject playerControl = GameObject.Find("CharacterObject");
-        pc = playerControl.GetComponent<PlayerControl>();
+        myPlayerControl = playerControl.GetComponent<PlayerControl>();
 
         mat = gameObject.GetComponent<MeshRenderer>().material;
 
         generateItemToBeInChest();
 
-        mtd = GameObject.Find("TextBox").GetComponent<TextDisplay>();
+        myTextDisplay = GameObject.Find("TextBox").GetComponent<TextDisplay>();
 
-       //myInventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        //myInventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+
+        //Instantiate(chest, new Vector3(5,1,5),Quaternion.identity);
+
 
 
     }//end of start()
@@ -67,8 +71,8 @@ public class Chest : MonoBehaviour {
             }
             
             print("Im fading");
-            mtd.setAndShowText();
-            //inventory.inventoryItems.Add(itemInChest);
+            myTextDisplay.setAndShowText();
+           
             GameObject.Destroy(gameObject);
         }    
     }//end of checkDistance to player

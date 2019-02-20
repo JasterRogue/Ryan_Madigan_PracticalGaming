@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,7 +12,7 @@ public class BattleManager : MonoBehaviour
      start a battle and keep track of majority of battle 
      related stuff*/
 
-    PlayerControl pc;//access to player control script
+    PlayerControl myPlayerControl;//access to player control script
     Player player;//access to player script
     BattleText myBattleText;
     Enemy enemy;//access to enemy script
@@ -19,41 +20,52 @@ public class BattleManager : MonoBehaviour
     int currentExp = 0;
     int expNeededToLevelUp = 60;
 
+
     // Start is called before the first frame update
     void Start()
     {
-        myBattleText = GameObject.Find("BattleGUI").GetComponent<BattleText>();
-        pc = GameObject.Find("char_ethan").GetComponent<PlayerControl>();
-        player = FindObjectOfType<Player>();
 
-        enemy = GameObject.Find("CubeOfDestruction").GetComponent<Enemy>();
+       // myBattleText = GameObject.Find("BattleGUI").GetComponent<BattleText>();
 
-        stepsToBattle = Random.Range(150, 301);
+
+
+       // enemy = GameObject.Find("CubeOfDestruction").GetComponent<Enemy>();
+
+        stepsToBattle = UnityEngine.Random.Range(150, 301);
         print(stepsToBattle);
+        DontDestroyOnLoad(gameObject);
+        SceneManager.LoadScene("Test Scene");
 
     }//end of start()
+
+    internal void ImHere(Player newplayer)
+    {
+        player = newplayer;
+        myPlayerControl = newplayer.gameObject.GetComponentInChildren<PlayerControl>();
+        myPlayerControl.StepsToNextBattleIs(stepsToBattle);
+    }
+
+    internal void StepCountReached()
+    {
+        print("Battle has occured");
+        // myBattleText.setUpStats();
+        SceneManager.LoadScene("Battle Scene");
+    }
 
     // Update is called once per frame
     void Update()
     {     
-        if(pc.stepCount>= stepsToBattle)
-        {
-            //Code to start a random battle goes here
-            print("Battle has occured");
-            myBattleText.setUpStats();
-            SceneManager.LoadScene("Battle Scene");
-            
-        }//end of if stepCount > steps to battle  */    
+  
         
 
-        if(enemy.getHP() < 1)
-        {
-            SceneManager.LoadScene("Test Scene");
-            stepsToBattle = Random.Range(150, 301);
-            currentExp += 30;
-            checkForLevelUp();
-            pc.stepCount = 0;
-        }
+        //if(enemy.getHP() < 1)
+        //{
+        //    SceneManager.LoadScene("Test Scene");
+        //    stepsToBattle = Random.Range(150, 301);
+        //    currentExp += 30;
+        //    checkForLevelUp();
+        //    myPlayerControl.stepCount = 0;
+        //}
     }//end of update()
 
     public void checkForLevelUp()

@@ -9,7 +9,7 @@ public class Player : Character {
     int chanceOfCritical;
     int variedDamage;
     int variedPercent;
-
+    BattleManager theManager;
     Enemy enemyStats;
 
     public Player()
@@ -33,7 +33,10 @@ public class Player : Character {
 	// Use this for initialization
 	void Start ()
     {
-        enemyStats = GameObject.Find("CubeOfDestruction").GetComponent<Enemy>();
+        theManager = FindObjectOfType<BattleManager>();
+        theManager.ImHere(this);
+        
+     //   enemyStats = GameObject.Find("CubeOfDestruction").GetComponent<Enemy>();
 
     
 		

@@ -19,6 +19,7 @@ public class BattleManager : MonoBehaviour
     int stepsToBattle;
     int currentExp = 0;
     int expNeededToLevelUp = 60;
+    public bool inBattle;
 
 
     // Start is called before the first frame update
@@ -41,8 +42,12 @@ public class BattleManager : MonoBehaviour
     internal void ImHere(Player newplayer)
     {
         player = newplayer;
-        myPlayerControl = newplayer.gameObject.GetComponentInChildren<PlayerControl>();
-        myPlayerControl.StepsToNextBattleIs(stepsToBattle);
+        if (!Global.manager.inBattle)
+        {
+            myPlayerControl = newplayer.gameObject.GetComponentInChildren<PlayerControl>();
+            myPlayerControl.StepsToNextBattleIs(stepsToBattle);
+        }
+        
     }
 
     internal void StepCountReached()
@@ -50,6 +55,7 @@ public class BattleManager : MonoBehaviour
         print("Battle has occured");
         // myBattleText.setUpStats();
         SceneManager.LoadScene("Battle Scene");
+        battleHasOccured();
     }
 
     // Update is called once per frame
@@ -88,6 +94,11 @@ public class BattleManager : MonoBehaviour
         myBattleText.setUpStats();
 
         
+    }
+
+    void battleHasOccured()
+    {
+        inBattle = true;
     }
 
 

@@ -15,14 +15,13 @@ public class BattleText : MonoBehaviour {
     int hpUnder30Percent;
     int mpUnder30Percent;
     Button[] allButttons;
-    BattleManager myBattleManager;
+    
 
 
 	// Use this for initialization
 	void Start ()
     {
         myPlayer = GameObject.Find("char_ethan").GetComponent<Player>();
-        myBattleManager = GameObject.Find("BattleManager").GetComponent<BattleManager>();
         allButttons = FindObjectsOfType<Button>();
         allButttons[1].onClick.AddListener(playerAttack);
         setUpStats();
@@ -61,23 +60,11 @@ public class BattleText : MonoBehaviour {
             setUpStats();
         }
 
-        //if(myPlayer.isPlayerTurn)
-        //{
-        //    GUI.enabled = true;
-        //}
-
-        //else
-        //{
-        //    GUI.enabled = false;
-
-        //}
-
-
     }
 
     public void playerAttack()
     {
-        myBattleManager.playerHasAttacked();
+        Global.manager.playerHasAttacked();
     }
 
    

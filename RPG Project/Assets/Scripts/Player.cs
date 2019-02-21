@@ -9,7 +9,7 @@ public class Player : Character {
     int chanceOfCritical;
     int variedDamage;
     int variedPercent;
-    BattleManager theManager;
+    //BattleManager theManager;
     Enemy enemyStats;
 
     public Player()
@@ -33,8 +33,8 @@ public class Player : Character {
 	// Use this for initialization
 	void Start ()
     {
-        theManager = FindObjectOfType<BattleManager>();
-        theManager.ImHere(this);
+      
+        Global.manager.ImHere(this);
         
      //   enemyStats = GameObject.Find("CubeOfDestruction").GetComponent<Enemy>();
 
@@ -44,6 +44,11 @@ public class Player : Character {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if(Global.manager.inBattle == true)
+        {
+            enemyStats = GameObject.Find("CubeOfDestruction").GetComponent<Enemy>();
+        }
 		
 	}//end of update()
 

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    enum PlayerModes { Wandering, Battle};
+    PlayerModes IAmCurrently = PlayerModes.Wandering;
+
     private float speed= 10.0f;
     private float turningSpeed = 90.0f;
     private Animator animate;
@@ -13,7 +16,7 @@ public class PlayerControl : MonoBehaviour
 
     // Use this for initialization
     void Start () {
-
+   
         animate = GetComponentInChildren<Animator>();
         if (animate)
             print("Found");
@@ -21,12 +24,17 @@ public class PlayerControl : MonoBehaviour
             print("NO Animator");
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
+
+        switch (IAmCurrently)
+        {
+
+            case PlayerModes.Wandering:
         Camera.main.transform.position = transform.position + new Vector3(0, 3, -10);
 
-        if(Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
             animate.SetBool("IsRunning", true);
             moveForward(speed);
@@ -47,11 +55,36 @@ public class PlayerControl : MonoBehaviour
 
         if (stepCount > stepCountdown)
             Global.manager.StepCountReached();
+
+                break;
+
+            case PlayerModes.Battle:
+
+
+
+                break;
+
+
+
+
+    }
     }
 
-    internal void StepsToNextBattleIs(int stepsToBattle)
+
+
+    internal void StepsToNextBattleIs(int stepsToBattle, bool inBattle)
     {
-        stepCountdown = stepsToBattle;
+
+        if (inBattle)
+        {
+            IAmCurrently = PlayerModes.Battle;
+        }
+        else
+        {
+            IAmCurrently = PlayerModes.Wandering;
+            stepCountdown = stepsToBattle;
+        }
+
     }
 
     /// <summary>

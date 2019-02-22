@@ -30,7 +30,7 @@ public class TextDisplay : MonoBehaviour {
         {
             timer -= Time.deltaTime;
             if (timer < 0)
-                Destroy(gameObject);
+                itemText.gameObject.SetActive(false);
 
         }
 	}

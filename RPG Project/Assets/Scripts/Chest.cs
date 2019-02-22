@@ -14,7 +14,7 @@ public class Chest : MonoBehaviour {
     Inventory myInventory;
     TextDisplay myTextDisplay;
     public float itemTextTime = 0.0f;
-    public Transform chest;
+    
     
    
 
@@ -35,7 +35,7 @@ public class Chest : MonoBehaviour {
 
         //myInventory = GameObject.Find("Inventory").GetComponent<Inventory>();
 
-        //Instantiate(chest, new Vector3(5,1,5),Quaternion.identity);
+        
 
 
 

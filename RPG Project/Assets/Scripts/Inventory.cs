@@ -6,6 +6,8 @@ public class Inventory : MonoBehaviour {
     /*This script will be used for the inventory,
      *the inventory will store all possible items the player can carry */
 
+    List<Items> inventory = new List<Items>();
+
 	// Use this for initialization
 	void Start ()
     {

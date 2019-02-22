@@ -11,6 +11,7 @@ public class Player : Character {
     int variedPercent;
     //BattleManager theManager;
     Enemy enemyStats;
+    Weapon weaponDamage;
 
     public Player()
     {
@@ -47,7 +48,8 @@ public class Player : Character {
 
         if(Global.manager.inBattle == true)
         {
-            enemyStats = GameObject.Find("CubeOfDestruction").GetComponent<Enemy>();
+            enemyStats = GameObject.FindObjectOfType<Enemy>();
+            weaponDamage = GameObject.FindObjectOfType<Weapon>();
         }
 		
 	}//end of update()
@@ -109,7 +111,7 @@ public class Player : Character {
     public void playerAttack()
     {
         //calculates  the damage output
-        damage = ((getStrength() * 2) - enemyStats.getDefence());
+        damage = (((getStrength() * 2) + weaponDamage.damage) - enemyStats.getDefence());
         chanceOfCritical = Random.Range(1, 101);
 
         if (damage < 1)

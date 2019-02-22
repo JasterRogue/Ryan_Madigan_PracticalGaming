@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class BattleManager : MonoBehaviour
 {
     /*The purpose of this script is to deal 
@@ -25,12 +26,7 @@ public class BattleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
        // myBattleText = GameObject.Find("BattleGUI").GetComponent<BattleText>();
-
-
-
-       // enemy = GameObject.Find("CubeOfDestruction").GetComponent<Enemy>();
 
         stepsToBattle = UnityEngine.Random.Range(150, 301);
         print(stepsToBattle);
@@ -42,11 +38,10 @@ public class BattleManager : MonoBehaviour
     internal void ImHere(Player newplayer)
     {
         player = newplayer;
-        if (!Global.manager.inBattle)
-        {
-            myPlayerControl = newplayer.gameObject.GetComponentInChildren<PlayerControl>();
-            myPlayerControl.StepsToNextBattleIs(stepsToBattle);
-        }
+       
+        myPlayerControl = newplayer.gameObject.GetComponentInChildren<PlayerControl>();
+        myPlayerControl.StepsToNextBattleIs(stepsToBattle, inBattle);
+        
         
     }
 
@@ -55,23 +50,28 @@ public class BattleManager : MonoBehaviour
         print("Battle has occured");
         // myBattleText.setUpStats();
         SceneManager.LoadScene("Battle Scene");
-        battleHasOccured();
+        inBattle = true;
+        enemy = GameObject.FindObjectOfType<Enemy>();
+
     }
 
     // Update is called once per frame
     void Update()
-    {     
-  
-        
+    {
+        if (enemy)
+        {
+            if (enemy.getHP() < 1)
+            {
+                SceneManager.LoadScene("Test Scene");
+                inBattle = false;
+                stepsToBattle = UnityEngine.Random.Range(150, 301);
+                myPlayerControl.StepsToNextBattleIs(stepsToBattle, inBattle);
+                currentExp += 30;
+                checkForLevelUp();
+                myPlayerControl.stepCount = 0;
+            }
+        }//end of if enemy exists
 
-        //if(enemy.getHP() < 1)
-        //{
-        //    SceneManager.LoadScene("Test Scene");
-        //    stepsToBattle = Random.Range(150, 301);
-        //    currentExp += 30;
-        //    checkForLevelUp();
-        //    myPlayerControl.stepCount = 0;
-        //}
     }//end of update()
 
     public void checkForLevelUp()
@@ -89,17 +89,35 @@ public class BattleManager : MonoBehaviour
     {
         player.playerAttack();
 
-        enemy.enemyTurn();
+        if(!enemy)
+        {
+            enemy = FindObjectOfType<Enemy>();
+        }//if enemy doesnt exist find it
 
-        myBattleText.setUpStats();
+        if(enemy)
+        {
+            enemy.enemyTurn();
+        }
+
+        
+
+        if (!myBattleText)
+        {
+            myBattleText = FindObjectOfType<BattleText>();
+        }
+
+
+        if (myBattleText)
+        {
+            myBattleText.setUpStats();
+        }
+
+
 
         
     }
 
-    void battleHasOccured()
-    {
-        inBattle = true;
-    }
+ 
 
 
 

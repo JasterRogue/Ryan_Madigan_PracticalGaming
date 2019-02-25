@@ -8,8 +8,22 @@ public class Weapon : Item {
     public int damage = 3;
     string weaponName;
 
+    public Weapon()
+    {
+        damage = 0;
+        weaponName = "";
+    }
+
+    public Weapon(int damage, string name)
+    {
+        damage = this.damage;
+        name = this.weaponName;
+    }
+
 
 	void Start () {
+
+        
 		
 	}
 	

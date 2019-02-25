@@ -49,7 +49,7 @@ public class Player : Character {
         if(Global.manager.inBattle == true)
         {
             enemyStats = GameObject.FindObjectOfType<Enemy>();
-            weaponDamage = GameObject.FindObjectOfType<Weapon>();
+           // weaponDamage = GameObject.FindObjectOfType<Weapon>();
         }
 		
 	}//end of update()

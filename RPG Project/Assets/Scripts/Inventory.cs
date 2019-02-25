@@ -6,12 +6,12 @@ public class Inventory : MonoBehaviour {
     /*This script will be used for the inventory,
      *the inventory will store all possible items the player can carry */
 
-    List<Items> Items;
+    List<Item> Items;
 
 	// Use this for initialization
 	void Start ()
     {
-        Items = new List<Items>();
+        Items = new List<Item>();
 
     }//end of start()
 	
@@ -23,7 +23,7 @@ public class Inventory : MonoBehaviour {
 
     public void addTo(Item newItem)
     {
-
+        Items.Add(newItem);
     }
 
     internal Item getItem(int v)

@@ -55,10 +55,25 @@ public class PlayerControl : MonoBehaviour
 
         if (stepCount > stepCountdown)
             Global.manager.StepCountReached();
+                
 
                 break;
 
             case PlayerModes.Battle:
+
+                animate.SetBool("battleIdle", true);
+                if (Global.manager.playerAttacking)
+                {
+                    animate.SetBool("leftPunch", true);
+                    animate.SetBool("battleIdle", false);
+                }
+
+                else
+                {
+                    animate.SetBool("leftPunch", false);
+                    animate.SetBool("battleIdle", true);
+
+                }
 
 
 

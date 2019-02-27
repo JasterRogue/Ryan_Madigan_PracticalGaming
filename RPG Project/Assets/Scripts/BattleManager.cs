@@ -21,6 +21,7 @@ public class BattleManager : MonoBehaviour
     int currentExp = 0;
     int expNeededToLevelUp = 60;
     public bool inBattle;
+    public bool playerAttacking;
 
 
     // Start is called before the first frame update
@@ -84,6 +85,7 @@ public class BattleManager : MonoBehaviour
     public void playerHasAttacked()
     {
         player.playerAttack();
+        playerAttacking = true;
 
         if(!enemy)
         {
@@ -92,6 +94,8 @@ public class BattleManager : MonoBehaviour
 
         if(enemy)
         {
+
+            playerAttacking = false;
             enemy.enemyTurn();
         }
 

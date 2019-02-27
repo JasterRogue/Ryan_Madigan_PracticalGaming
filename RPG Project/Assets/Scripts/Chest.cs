@@ -17,7 +17,7 @@ public class Chest : MonoBehaviour {
 
     internal void YouContain(Item newItem)
     {
-        myInventory.addTo(newItem);
+        //myInventory.addTo(newItem);
     }
 
     public float itemTextTime = 0.0f;
@@ -77,7 +77,7 @@ public class Chest : MonoBehaviour {
 
             myHealthItem = new healthItem("Thera Leaf", 90);
 
-            myInventory.addTo(myHealthItem);
+            //myInventory.addTo(myHealthItem);
 
         }    
     }//end of checkDistance to player

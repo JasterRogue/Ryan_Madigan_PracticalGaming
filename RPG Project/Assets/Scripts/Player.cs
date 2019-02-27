@@ -111,7 +111,7 @@ public class Player : Character {
     public void playerAttack()
     {
         //calculates  the damage output
-        damage = (((getStrength() * 2) + weaponDamage.damage) - enemyStats.getDefence());
+        damage = (((getStrength() * 2)) - enemyStats.getDefence());
         chanceOfCritical = Random.Range(1, 101);
 
         if (damage < 1)

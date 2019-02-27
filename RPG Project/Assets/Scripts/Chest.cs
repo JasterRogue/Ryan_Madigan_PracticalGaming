@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +14,15 @@ public class Chest : MonoBehaviour {
     public string itemInChest;
     Inventory myInventory;
     TextDisplay myTextDisplay;
+
+    internal void YouContain(Item newItem)
+    {
+        myInventory.addTo(newItem);
+    }
+
     public float itemTextTime = 0.0f;
+    healthItem myHealthItem;
+    mpItem myMPItem;
     
     
    
@@ -44,42 +53,38 @@ public class Chest : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        if(Input.GetKey(KeyCode.E))
+        {
+            checkDistanceToPlayer();
+        }
 
-        checkDistanceToPlayer();
+        
 	}//end of update()
 
     public void checkDistanceToPlayer()
     {
         Vector3 playerToChest;
         float playerToChestDistance;
-        //playerToChest = Vector3.Distance(playerTransform.position, transform.position);
+
         playerToChest = new Vector3(transform.position.x - playerTransform.position.x, transform.position.y - playerTransform.position.y, transform.position.z - playerTransform.position.z);
         playerToChestDistance = Mathf.Sqrt((playerToChest.x * playerToChest.x) + (playerToChest.y * playerToChest.y) + (playerToChest.z + playerToChest.z));
-       // print(playerToChestDistance);
-
-        if(playerToChestDistance <= 2 && Input.GetKey(KeyCode.E))
-        {
-            //pc.openChest();
-
-            while (mat.color.a > 0)
-            {
-                Color newColor = mat.color;
-                newColor.a -= Time.deltaTime;
-                mat.color = newColor;
-                gameObject.GetComponent<MeshRenderer>().material = mat;
-                
-            }
-            
-            print("Im fading");
+      
+        if(playerToChestDistance <= 4)
+        {  
             myTextDisplay.setAndShowText();
            
             GameObject.Destroy(gameObject);
+
+            myHealthItem = new healthItem("Thera Leaf", 90);
+
+            myInventory.addTo(myHealthItem);
+
         }    
     }//end of checkDistance to player
 
     public void generateItemToBeInChest()
     {
-        itemInChest = items[Random.Range(0, 3)];
+        itemInChest = items[UnityEngine.Random.Range(0, 3)];
     }
 
 

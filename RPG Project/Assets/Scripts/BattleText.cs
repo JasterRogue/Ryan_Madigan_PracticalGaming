@@ -16,8 +16,6 @@ public class BattleText : MonoBehaviour {
     int mpUnder30Percent;
     Button[] allButttons;
     
-
-
 	// Use this for initialization
 	void Start ()
     {
@@ -30,9 +28,7 @@ public class BattleText : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-
-   
-
+        //if players hp is less than 30% change colour to yellow
         if (myPlayer.getHP() < hpUnder30Percent)
         {
             currentHPText.color = new Color(233, 255, 0);
@@ -43,6 +39,7 @@ public class BattleText : MonoBehaviour {
             currentHPText.color = new Color(255.0f, 255.0f, 255.0f);
         }
 
+        //if players mp is less than 30% change colour to yellow
         if (myPlayer.getMP() < mpUnder30Percent)
         {
             currentMPText.color = new Color(233, 255, 0);
@@ -53,22 +50,12 @@ public class BattleText : MonoBehaviour {
             currentMPText.color = new Color(255.0f, 255.0f, 255.0f);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            myPlayer.setHP(myPlayer.getHP() - 40);
-            myPlayer.setMP(myPlayer.getMP() - 23);
-            setUpStats();
-        }
-
     }
 
     public void playerAttack()
     {
         Global.manager.playerHasAttacked();
     }
-
-   
-
 
     public void setUpStats()
     {

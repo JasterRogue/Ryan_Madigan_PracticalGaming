@@ -24,9 +24,7 @@ public class Item
 
     public Item(string name, string type)
     {
-
         setType(type);
-
 
         setName(name);
     }
@@ -42,28 +40,14 @@ public class Item
         return type;
     }
 
-
-
-    /** method to set the Type value 
-
-     * @param Type the Type of a Item object 
-
-     */
-
-
     public void setType(string Type)
-
     {
-
         this.type = Type;
-
     }
 
 
     public void setName(string name)
     {
-
         this.name = name;
-
     }
 }

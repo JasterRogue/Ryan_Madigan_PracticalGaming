@@ -26,12 +26,10 @@ public class BattleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       // myBattleText = GameObject.Find("BattleGUI").GetComponent<BattleText>();
-
         stepsToBattle = UnityEngine.Random.Range(150, 301);
         print(stepsToBattle);
         DontDestroyOnLoad(gameObject);
-        SceneManager.LoadScene("Test Scene");
+        SceneManager.LoadScene("Menu Scene");
 
     }//end of start()
 
@@ -47,8 +45,6 @@ public class BattleManager : MonoBehaviour
 
     internal void StepCountReached()
     {
-        print("Battle has occured");
-        // myBattleText.setUpStats();
         SceneManager.LoadScene("Battle Scene");
         inBattle = true;
         enemy = GameObject.FindObjectOfType<Enemy>();

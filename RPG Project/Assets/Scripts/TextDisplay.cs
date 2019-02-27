@@ -11,12 +11,15 @@ public class TextDisplay : MonoBehaviour {
     private float timer;
     private bool timerActive;
 
+    ChestCreator myChestCreator;
+
 
     // Use this for initialization
     void Start ()
     {
         myChest = GameObject.Find("TestChest").GetComponent<Chest>();
         itemText = GameObject.Find("TextBox").GetComponentInChildren<Text>();
+        myChestCreator = GameObject.FindObjectOfType<ChestCreator>();
 
         itemText.gameObject.SetActive(false);
        // itemText.GetComponent<Text>().enabled = false;

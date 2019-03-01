@@ -54,7 +54,7 @@ public class BattleText : MonoBehaviour {
 
     public void playerAttack()
     {
-        Global.manager.playerHasAttacked();
+        Global.manager.AttackButtonPressed();
     }
 
     public void setUpStats()

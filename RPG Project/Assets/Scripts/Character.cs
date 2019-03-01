@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour {
+public abstract class Character : MonoBehaviour {
 
     public string characterName;
     public int level;
@@ -102,6 +103,14 @@ public class Character : MonoBehaviour {
         return characterName;
     }
 
+    internal void StartCombatTurn()
+    {
+        waitForAttackChoice();
+    }
+
+    internal abstract void waitForAttackChoice();
+
+
     public int getLevel()
     {
         return level;
@@ -162,6 +171,14 @@ public class Character : MonoBehaviour {
 		
 	}
 	
+
+
+    internal void TurnFinished()
+    {
+        Global.manager.IveFinishedMyTurn();
+
+
+    }
 	// Update is called once per frame
 	void Update () {
 		

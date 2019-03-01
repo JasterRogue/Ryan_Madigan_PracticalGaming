@@ -34,27 +34,27 @@ public class PlayerControl : MonoBehaviour
             case PlayerModes.Wandering:
         Camera.main.transform.position = transform.position + new Vector3(0, 3, -10);
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            animate.SetBool("IsRunning", true);
-            moveForward(speed);
-            stepCount++;
-        }
-        else
-            animate.SetBool("IsRunning", false);
+                if (Input.GetKey(KeyCode.W))
+                {
+                    animate.SetBool("IsRunning", true);
+                    moveForward(speed);
+                    stepCount++;
+                }
+                else
+                    animate.SetBool("IsRunning", false);
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            turnLeft(turningSpeed);
-        }
+                if (Input.GetKey(KeyCode.A))
+                {
+                    turnLeft(turningSpeed);
+                }
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            turnRight(turningSpeed);
-        }
+                if (Input.GetKey(KeyCode.D))
+                {
+                    turnRight(turningSpeed);
+                }
 
-        if (stepCount > stepCountdown)
-            Global.manager.StepCountReached();
+                if (stepCount > stepCountdown)
+                    Global.manager.StepCountReached();
                 
 
                 break;
@@ -62,10 +62,24 @@ public class PlayerControl : MonoBehaviour
             case PlayerModes.Battle:
 
                 animate.SetBool("battleIdle", true);
+
                 if (Global.manager.playerAttacking)
                 {
+                    moveToTarget();
                     animate.SetBool("leftPunch", true);
                     animate.SetBool("battleIdle", false);
+
+                    pointBack();
+
+                    while(transform.position != new Vector3(0,0,10))
+                    {
+                        moveInBattle();
+                        animate.SetBool("isRunning", true);
+
+                    }
+
+                    animate.SetBool("isRunning", false);
+                    animate.SetBool("battleIdle", true);
                 }
 
                 else
@@ -75,15 +89,10 @@ public class PlayerControl : MonoBehaviour
 
                 }
 
-
-
                 break;
 
-
-
-
-    }
-    }
+    }//end of switch(iAmCurrently)
+    }//end of update()
 
 
 
@@ -142,5 +151,34 @@ public class PlayerControl : MonoBehaviour
     private void turnRight(float turningSpeed)
     {
         transform.Rotate(Vector3.down, turningSpeed * Time.deltaTime);
+    }
+
+    public void moveToTarget()
+    {
+        while(transform.position != new Vector3(0,0,10))
+        {
+            moveInBattle();
+            animate.SetBool("battleIdle", false);
+            animate.SetBool("isRunning", true);
+        }
+
+        animate.SetBool("isRunning", false);
+
+    }//end of move to target
+
+    public void moveInBattle()
+    {
+        transform.Translate(Vector3.forward * Time.deltaTime);
+    }
+
+    public void pointForward()
+    {
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
+    }
+
+    public void pointBack()
+    {
+        transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
     }
 }

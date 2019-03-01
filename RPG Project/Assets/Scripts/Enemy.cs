@@ -90,4 +90,9 @@ public class Enemy : Character {
 
 
     }
+
+    internal override void waitForAttackChoice()
+    {
+      
+    }
 }

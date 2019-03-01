@@ -1,9 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : Character {
 
+
+    enum PlayerModes { WaitForUserInput,WaitForTurn}
+
+    PlayerModes currently = PlayerModes.WaitForTurn;
     public bool isPlayerTurn;
     int damage;
     int chanceOfCritical;
@@ -12,6 +17,7 @@ public class Player : Character {
     //BattleManager theManager;
     Enemy enemyStats;
     Weapon weaponDamage;
+    PlayerControl animateChar;
 
     public Player()
     {
@@ -27,6 +33,7 @@ public class Player : Character {
         setSpecialDefence(9);
         setAgility(11);
         setLuck(5);
+        animateChar = GetComponent<PlayerControl>();
     }//end of player()
     
    
@@ -46,6 +53,21 @@ public class Player : Character {
 	// Update is called once per frame
 	void Update () {
 
+
+
+        switch (currently)
+        {
+
+            case PlayerModes.WaitForUserInput:
+
+                break;
+
+
+
+        }
+
+
+
         if(Global.manager.inBattle == true)
         {
             enemyStats = GameObject.FindObjectOfType<Enemy>();
@@ -63,14 +85,14 @@ public class Player : Character {
         {
             setLevel(getLevel() + 1);
             //HP will increase by random amount 
-            hpToIncrease = Random.Range(12, 18);
+            hpToIncrease = UnityEngine.Random.Range(12, 18);
             setMaxHP(getMaxHP() + hpToIncrease);
             if (getMaxHP() > 999)
             {
                 setMaxHP(999);
             }
             //MP will increase by a random amount
-            mpToIncrease = Random.Range(7, 10);
+            mpToIncrease = UnityEngine.Random.Range(7, 10);
             setMaxMP(getMaxMP() + mpToIncrease);
 
             if (getLevel() % 2 == 0)
@@ -112,7 +134,7 @@ public class Player : Character {
     {
         //calculates  the damage output
         damage = (((getStrength() * 2)) - enemyStats.getDefence());
-        chanceOfCritical = Random.Range(1, 101);
+        chanceOfCritical = UnityEngine.Random.Range(1, 101);
 
         if (damage < 1)
         {
@@ -124,12 +146,22 @@ public class Player : Character {
         {
             damage = (damage + (damage / 2));
         }
-        variedPercent = Random.Range(0, 21);
+        variedPercent = UnityEngine.Random.Range(0, 21);
         variedDamage = ((damage * variedPercent) / 100);
         damage = damage + variedDamage;
         print(damage);
 
         enemyStats.setHP(enemyStats.getHP() - damage);
 
+    }
+
+    internal void MeleeAttack()
+    {
+        animateChar.moveToTarget();
+    }
+
+    internal override void waitForAttackChoice()
+    {
+        currently = PlayerModes.WaitForUserInput;
     }
 }//end of class

@@ -7,6 +7,10 @@ using UnityEngine.SceneManagement;
 
 public class BattleManager : MonoBehaviour
 {
+
+    enum BattlePhase {NonCombat,  InformOfTurn, WaitForTurnToEnd, ChooseNextCombatant}
+
+    BattlePhase currently = BattlePhase.NonCombat;
     /*The purpose of this script is to deal 
      with battle encounters for the game.
      It will generate the requirements to 
@@ -23,6 +27,9 @@ public class BattleManager : MonoBehaviour
     public bool inBattle;
     public bool playerAttacking;
 
+    List<Character> combatants;
+    int whosTurn = 0;
+    private int indexOfPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +39,9 @@ public class BattleManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         SceneManager.LoadScene("Menu Scene");
 
+        combatants = new List<Character>();
+
+
     }//end of start()
 
     internal void ImHere(Player newplayer)
@@ -40,6 +50,9 @@ public class BattleManager : MonoBehaviour
        
         myPlayerControl = newplayer.gameObject.GetComponentInChildren<PlayerControl>();
         myPlayerControl.StepsToNextBattleIs(stepsToBattle, inBattle);
+
+        combatants.Add(player);
+        indexOfPlayer = combatants.IndexOf(player);
         
         
     }
@@ -49,25 +62,50 @@ public class BattleManager : MonoBehaviour
         SceneManager.LoadScene("Battle Scene");
         inBattle = true;
         enemy = GameObject.FindObjectOfType<Enemy>();
+        combatants.Add(enemy);
+        currently = BattlePhase.InformOfTurn;
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (enemy)
+        switch (currently)
         {
-            if (enemy.getHP() < 1)
-            {
-                SceneManager.LoadScene("Test Scene");
-                inBattle = false;
-                stepsToBattle = UnityEngine.Random.Range(150, 301);
-                myPlayerControl.StepsToNextBattleIs(stepsToBattle, inBattle);
-                currentExp += 30;
-                checkForLevelUp();
-                myPlayerControl.stepCount = 0;
-            }
-        }//end of if enemy exists
+
+            case BattlePhase.InformOfTurn:
+
+                combatants[whosTurn].StartCombatTurn();
+                currently = BattlePhase.WaitForTurnToEnd;
+                break;
+
+            case BattlePhase.WaitForTurnToEnd:
+
+
+                break;
+
+            case BattlePhase.ChooseNextCombatant:
+
+                whosTurn = (whosTurn + 1) % combatants.Count;
+
+                currently = BattlePhase.InformOfTurn;
+
+                break;
+        }
+
+        
+      //if (enemy.getHP() < 1)
+      //   {
+      //          SceneManager.LoadScene("Test Scene");
+      //          inBattle = false;
+      //          stepsToBattle = UnityEngine.Random.Range(150, 301);
+      //          myPlayerControl.StepsToNextBattleIs(stepsToBattle, inBattle);
+      //          currentExp += 30;
+      //          checkForLevelUp();
+      //          myPlayerControl.stepCount = 0;
+      //   }
+        //end of if enemy exists
 
     }//end of update()
 
@@ -82,10 +120,19 @@ public class BattleManager : MonoBehaviour
         }//end of if exp needed
     }
 
-    public void playerHasAttacked()
+    internal void IveFinishedMyTurn()
     {
-        player.playerAttack();
-        playerAttacking = true;
+        currently = BattlePhase.ChooseNextCombatant;
+    }
+
+    public void AttackButtonPressed()
+    {
+        if (whosTurn == indexOfPlayer)
+        {
+            (combatants[indexOfPlayer] as Player).MeleeAttack();
+            player.playerAttack();
+            playerAttacking = true;
+        }
 
         if(!enemy)
         {

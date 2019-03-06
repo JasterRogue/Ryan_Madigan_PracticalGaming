@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,10 +10,9 @@ public class Enemy : Character {
     int chanceOfCritical;
     int variedDamage;
     int variedPercent;
-    Random randomCritical = new Random();
+    UnityEngine.Random randomCritical = new UnityEngine.Random();
     Player playerStats;
-
-
+    public bool isEnemyAlive;
 
     public Enemy()
     {
@@ -41,7 +41,16 @@ public class Enemy : Character {
 	// Update is called once per frame
 	void Update ()
     {
-        
+        if(Global.manager.inBattle)
+        {
+            isEnemyAlive = true;
+        }
+
+        if(getHP()<1)
+        {
+            GameObject.Destroy(gameObject);
+            EnemyHasDied();
+        }
 		
 	}
 
@@ -60,7 +69,7 @@ public class Enemy : Character {
 
             //calculates  the damage output
             damage = ((getStrength() * 2) - playerStats.getDefence());
-            chanceOfCritical = Random.Range(1, 101);
+            chanceOfCritical = UnityEngine.Random.Range(1, 101);
 
             if (damage < 1)
             {
@@ -72,7 +81,7 @@ public class Enemy : Character {
             {
                 damage = (damage + (damage / 2));
             }
-            variedPercent = Random.Range(0, 21);
+            variedPercent = UnityEngine.Random.Range(0, 21);
             variedDamage = ((damage * variedPercent) / 100);
             damage = damage + variedDamage;
             print("Enemy:  " + damage);
@@ -84,11 +93,14 @@ public class Enemy : Character {
         else
         {
             GameObject.Destroy(gameObject);
+            EnemyHasDied();
         }
 
+    }
 
-
-
+    private void EnemyHasDied()
+    {
+        isEnemyAlive = false;
     }
 
     internal override void waitForAttackChoice()

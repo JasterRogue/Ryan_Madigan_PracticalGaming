@@ -18,6 +18,7 @@ public class Player : Character {
     Enemy enemyStats;
     Weapon weaponDamage;
     PlayerControl animateChar;
+    public bool isPlayerAlive;
 
     public Player()
     {
@@ -33,7 +34,7 @@ public class Player : Character {
         setSpecialDefence(9);
         setAgility(11);
         setLuck(5);
-        animateChar = GetComponent<PlayerControl>();
+        
     }//end of player()
     
    
@@ -43,17 +44,17 @@ public class Player : Character {
     {
       
         Global.manager.ImHere(this);
-        
-     //   enemyStats = GameObject.Find("CubeOfDestruction").GetComponent<Enemy>();
+        animateChar = GetComponent<PlayerControl>();
+        isPlayerAlive = true;
 
-    
-		
-	}//end of start()
+        //   enemyStats = GameObject.Find("CubeOfDestruction").GetComponent<Enemy>();
+
+
+
+    }//end of start()
 	
 	// Update is called once per frame
 	void Update () {
-
-
 
         switch (currently)
         {
@@ -61,17 +62,17 @@ public class Player : Character {
             case PlayerModes.WaitForUserInput:
 
                 break;
-
-
-
         }
-
-
 
         if(Global.manager.inBattle == true)
         {
             enemyStats = GameObject.FindObjectOfType<Enemy>();
            // weaponDamage = GameObject.FindObjectOfType<Weapon>();
+        }
+
+        if(getHP()<1)
+        {
+            playerHasDied();
         }
 		
 	}//end of update()
@@ -163,5 +164,10 @@ public class Player : Character {
     internal override void waitForAttackChoice()
     {
         currently = PlayerModes.WaitForUserInput;
+    }
+
+    void playerHasDied()
+    {
+        isPlayerAlive = false;
     }
 }//end of class

@@ -65,7 +65,6 @@ public class BattleManager : MonoBehaviour
         combatants.Add(enemy);
         currently = BattlePhase.InformOfTurn;
 
-
     }
 
     // Update is called once per frame
@@ -94,18 +93,33 @@ public class BattleManager : MonoBehaviour
                 break;
         }
 
-        
-      //if (enemy.getHP() < 1)
-      //   {
-      //          SceneManager.LoadScene("Test Scene");
-      //          inBattle = false;
-      //          stepsToBattle = UnityEngine.Random.Range(150, 301);
-      //          myPlayerControl.StepsToNextBattleIs(stepsToBattle, inBattle);
-      //          currentExp += 30;
-      //          checkForLevelUp();
-      //          myPlayerControl.stepCount = 0;
-      //   }
-        //end of if enemy exists
+        if(enemy && inBattle)
+        {
+
+             if(!enemy.isEnemyAlive)
+               {
+                        SceneManager.LoadScene("Test Scene");
+                        inBattle = false;
+                        stepsToBattle = UnityEngine.Random.Range(150, 301);
+                        myPlayerControl.StepsToNextBattleIs(stepsToBattle, inBattle);
+                        currentExp += 30;
+                        checkForLevelUp();
+                        myPlayerControl.stepCount = 0;
+
+               }
+        }//end of if enemey exists
+
+       
+        if(player)
+        {
+            if(!player.isPlayerAlive && inBattle)
+                    {
+                        //Game over sequence;
+                        inBattle = false;
+                        SceneManager.LoadScene(4);//game over scene id
+
+                    }
+        }//end of if player exists
 
     }//end of update()
 
@@ -144,9 +158,7 @@ public class BattleManager : MonoBehaviour
 
             playerAttacking = false;
             enemy.enemyTurn();
-        }
-
-        
+        } 
 
         if (!myBattleText)
         {
@@ -164,9 +176,5 @@ public class BattleManager : MonoBehaviour
         
     }
 
- 
-
-
-
   
-}
+}//end of class

@@ -81,6 +81,7 @@ public class Enemy : Character {
             {
                 damage = (damage + (damage / 2));
             }
+
             variedPercent = UnityEngine.Random.Range(0, 21);
             variedDamage = ((damage * variedPercent) / 100);
             damage = damage + variedDamage;
@@ -106,5 +107,10 @@ public class Enemy : Character {
     internal override void waitForAttackChoice()
     {
       
+    }
+
+    public void enemyDamageTaken(int damage)
+    {
+        setHP(getHP() - damage);
     }
 }

@@ -23,6 +23,9 @@ public class BattleText : MonoBehaviour {
         allButttons = FindObjectsOfType<Button>();
         allButttons[1].onClick.AddListener(playerAttack);
         setUpStats();
+        
+        
+   
     }
 	
 	// Update is called once per frame

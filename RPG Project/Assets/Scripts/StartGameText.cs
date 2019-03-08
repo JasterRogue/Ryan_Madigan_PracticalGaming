@@ -19,7 +19,9 @@ public class StartGameText : MonoBehaviour {
 
     void beginGame()
     {
-        SceneManager.LoadScene("Test Scene");
+        //SceneManager.LoadScene("Test Scene");
+        Initiate.Fade("Test Scene", Color.black, 5);
+        //Got initiate and fade classes from asset store
 
     }
 	

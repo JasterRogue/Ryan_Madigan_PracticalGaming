@@ -7,9 +7,11 @@ public class Global : MonoBehaviour {
     // Use this for initialization
 
     public static BattleManager manager;
+    
 
 	void Start () {
 
+       
         manager = FindObjectOfType<BattleManager>();
 	}
 	

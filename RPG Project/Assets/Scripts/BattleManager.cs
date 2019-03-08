@@ -95,8 +95,9 @@ public class BattleManager : MonoBehaviour
 
         if(enemy && inBattle)
         {
+            print("Enemy HP: " + enemy.getHP());
 
-             if(!enemy.isEnemyAlive)
+             if(enemy.getHP()<1)
                {
                         SceneManager.LoadScene("Test Scene");
                         inBattle = false;
@@ -116,7 +117,9 @@ public class BattleManager : MonoBehaviour
                     {
                         //Game over sequence;
                         inBattle = false;
-                        SceneManager.LoadScene(4);//game over scene id
+                        //SceneManager.LoadScene(4);//game over scene id
+                        Initiate.Fade("Game Over", Color.black, 5);
+                
 
                     }
         }//end of if player exists
@@ -141,10 +144,11 @@ public class BattleManager : MonoBehaviour
 
     public void AttackButtonPressed()
     {
-        if (whosTurn == indexOfPlayer)
+        if (whosTurn == indexOfPlayer)//issue here not getting past this statement
         {
             (combatants[indexOfPlayer] as Player).MeleeAttack();
             player.playerAttack();
+            print("Player attack called");
             playerAttacking = true;
         }
 
@@ -155,7 +159,6 @@ public class BattleManager : MonoBehaviour
 
         if(enemy)
         {
-
             playerAttacking = false;
             enemy.enemyTurn();
         } 

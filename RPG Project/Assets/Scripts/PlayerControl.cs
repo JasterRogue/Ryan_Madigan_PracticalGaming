@@ -89,7 +89,9 @@ public class PlayerControl : MonoBehaviour
                 break;
 
             case PlayerModes.MoveToAttack:
+                pointForward();
                 moveInBattle();
+                animate.SetBool("IsRunning", true);
                 if (hasReachedTarget())
                 {
                     IAmCurrently = PlayerModes.Melee_Attack;
@@ -102,7 +104,7 @@ public class PlayerControl : MonoBehaviour
             case PlayerModes.Melee_Attack:
 
 
-                if (this.animate.GetCurrentAnimatorStateInfo(0).IsName("hk_rh_right_A")//animate.melee_Attack_Finished()
+                if (this.animate.GetCurrentAnimatorStateInfo(0).IsName("hk_rh_right_A"))//animate.melee_Attack_Finished()
                 {
                     IAmCurrently = PlayerModes.Move_Back;
                     if (hasReturnedToIdlePosition())
@@ -131,7 +133,7 @@ public class PlayerControl : MonoBehaviour
 
     private bool hasReachedTarget()
     {
-        if(transform.position.z > 6 && transform.position.z <= 10)
+        if(transform.position.z >= -6 && transform.position.z <= 6)
         {
             return true;
         }

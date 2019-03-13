@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    enum PlayerModes { Wandering, Battle};
-    PlayerModes IAmCurrently = PlayerModes.Wandering;
+
+    internal enum PlayerModes { Wandering, Battle_Idle, MoveToAttack, Melee_Attack, Move_Back, Range_Attack  };
+    internal PlayerModes IAmCurrently = PlayerModes.Wandering;
 
     private float speed= 10.0f;
     private float turningSpeed = 90.0f;
@@ -59,23 +60,19 @@ public class PlayerControl : MonoBehaviour
 
                 break;
 
-            case PlayerModes.Battle:
+            case PlayerModes.Battle_Idle:
 
                 animate.SetBool("battleIdle", true);
 
-                if (Global.manager.playerAttacking)
+                /*if (Global.manager.playerAttacking)
                 {
-                    moveToTarget();
+                    initiateMeleeAttack();
                     animate.SetBool("leftPunch", true);
                     animate.SetBool("battleIdle", false);
 
                     pointBack();
 
-                    while(transform.position != new Vector3(0,0,10))
-                    {
-                        moveInBattle();
-                        animate.SetBool("isRunning", true);
-
+                   
                     }
 
                     animate.SetBool("isRunning", false);
@@ -87,21 +84,67 @@ public class PlayerControl : MonoBehaviour
                     animate.SetBool("leftPunch", false);
                     animate.SetBool("battleIdle", true);
 
+                }*/
+
+                break;
+
+            case PlayerModes.MoveToAttack:
+                moveInBattle();
+                if (hasReachedTarget())
+                {
+                    IAmCurrently = PlayerModes.Melee_Attack;
+                    animate.SetBool("leftPunch", true);
+                    animate.SetBool("battleIdle", false);
+
                 }
 
                 break;
+            case PlayerModes.Melee_Attack:
+
+
+                if (this.animate.GetCurrentAnimatorStateInfo(0).IsName("hk_rh_right_A")//animate.melee_Attack_Finished()
+                {
+                    IAmCurrently = PlayerModes.Move_Back;
+                    if (hasReturnedToIdlePosition())
+                    {
+                        IAmCurrently = PlayerModes.Battle_Idle;
+
+                    }
+                }
+                break;
+
+
+
 
     }//end of switch(iAmCurrently)
     }//end of update()
 
+    private bool hasReturnedToIdlePosition()
+    {
+        if(transform.position.z > -2 && transform.position.z < 3)
+        {
+            return true;
+        }
 
+        return false;
+    }
+
+    private bool hasReachedTarget()
+    {
+        if(transform.position.z > 6 && transform.position.z <= 10)
+        {
+            return true;
+        }
+
+        return false;
+    }
 
     internal void StepsToNextBattleIs(int stepsToBattle, bool inBattle)
     {
 
         if (inBattle)
         {
-            IAmCurrently = PlayerModes.Battle;
+            IAmCurrently = PlayerModes.Battle_Idle;
         }
         else
         {
@@ -153,16 +196,11 @@ public class PlayerControl : MonoBehaviour
         transform.Rotate(Vector3.down, turningSpeed * Time.deltaTime);
     }
 
-    public void moveToTarget()
+    public void initiateMeleeAttack()
     {
-        while(transform.position != new Vector3(0,0,10))
-        {
-            moveInBattle();
-            animate.SetBool("battleIdle", false);
-            animate.SetBool("isRunning", true);
-        }
-
-        animate.SetBool("isRunning", false);
+        IAmCurrently = PlayerModes.MoveToAttack;
+        animate.SetBool("battleIdle", false);
+        animate.SetBool("isRunning", true);
 
     }//end of move to target
 

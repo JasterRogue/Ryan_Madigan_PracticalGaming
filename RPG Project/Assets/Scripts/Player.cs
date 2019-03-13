@@ -161,7 +161,7 @@ public class Player : Character {
 
     internal void MeleeAttack()
     {
-        animateChar.moveToTarget();
+        animateChar.initiateMeleeAttack();
     }
 
     internal override void waitForAttackChoice()

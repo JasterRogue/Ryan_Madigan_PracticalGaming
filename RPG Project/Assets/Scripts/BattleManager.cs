@@ -57,13 +57,28 @@ public class BattleManager : MonoBehaviour
         
     }
 
+    internal void ImHere(Enemy newplayer)
+    {
+
+
+        combatants.Add(newplayer);
+
+
+
+    }
+
     internal void StepCountReached()
     {
         SceneManager.LoadScene("Battle Scene");
         inBattle = true;
-        enemy = GameObject.FindObjectOfType<Enemy>();
-        combatants.Add(enemy);
+
+        combatants = new List<Character>();
+  
         currently = BattlePhase.InformOfTurn;
+        //for(int i = 0; i < combatants.Count; i++)
+        //{
+        //    print("Combatant" + combatants[i]);
+        //}
 
     }
 
@@ -117,7 +132,6 @@ public class BattleManager : MonoBehaviour
                     {
                         //Game over sequence;
                         inBattle = false;
-                        //SceneManager.LoadScene(4);//game over scene id
                         Initiate.Fade("Game Over", Color.black, 5);
                 
 

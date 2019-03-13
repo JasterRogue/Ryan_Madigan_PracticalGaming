@@ -35,6 +35,8 @@ public class Enemy : Character {
 	void Start ()
     {
         playerStats = GameObject.Find("char_ethan").GetComponent<Player>();
+
+        Global.manager.ImHere(this);
         
     }
 	

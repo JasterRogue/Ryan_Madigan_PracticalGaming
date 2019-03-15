@@ -14,20 +14,22 @@ public class PlayerControl : MonoBehaviour
     private Animator animate;
     public int stepCount=0; // Used to count number of steps player has taken for triggering random encounters
     private int stepCountdown;
+    Enemy enemy;
+    Vector3 playerPositionBeforeAttack;
+
 
     // Use this for initialization
     void Start () {
    
         animate = GetComponentInChildren<Animator>();
-        if (animate)
-            print("Found");
-        else
-            print("NO Animator");
-		
+        enemy = FindObjectOfType<Enemy>();
+    
 	}
 
     // Update is called once per frame
     void Update() {
+
+
 
         switch (IAmCurrently)
         {
@@ -57,34 +59,12 @@ public class PlayerControl : MonoBehaviour
                 if (stepCount > stepCountdown)
                     Global.manager.StepCountReached();
                 
-
                 break;
 
             case PlayerModes.Battle_Idle:
 
                 animate.SetBool("battleIdle", true);
-
-                /*if (Global.manager.playerAttacking)
-                {
-                    initiateMeleeAttack();
-                    animate.SetBool("leftPunch", true);
-                    animate.SetBool("battleIdle", false);
-
-                    pointBack();
-
-                   
-                    }
-
-                    animate.SetBool("isRunning", false);
-                    animate.SetBool("battleIdle", true);
-                }
-
-                else
-                {
-                    animate.SetBool("leftPunch", false);
-                    animate.SetBool("battleIdle", true);
-
-                }*/
+                playerPositionBeforeAttack = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
                 break;
 
@@ -103,27 +83,40 @@ public class PlayerControl : MonoBehaviour
                 break;
             case PlayerModes.Melee_Attack:
 
+                AnimatorClipInfo[] info = animate.GetCurrentAnimatorClipInfo(0);
+               // print(info[0].clip.name);
 
-                if (this.animate.GetCurrentAnimatorStateInfo(0).IsName("hk_rh_right_A"))//animate.melee_Attack_Finished()
+                if (info[0].clip.name == "hk_rh_right_A") //animate.melee_Attack_Finished()
                 {
-                    IAmCurrently = PlayerModes.Move_Back;
-                    if (hasReturnedToIdlePosition())
-                    {
-                        IAmCurrently = PlayerModes.Battle_Idle;
+                    //this.animate.GetCurrentAnimatorStateInfo(0).IsName("hk_rh_right_A")
 
-                    }
+                    print("Moving back");
+
+                    /*pointBack();
+                    moveInBattle();
+                    animate.SetBool("IsRunning", true);
+                    animate.SetBool("leftPunch", false);*/
+                    transform.position = new Vector3(0, 0, 0);
+
+                   // if (hasReturnedToIdlePosition())
+                   // {
+                        IAmCurrently = PlayerModes.Battle_Idle;
+                        pointForward();
+                   // }
                 }
                 break;
 
+    
 
+        }//end of switch(iAmCurrently)
 
-
-    }//end of switch(iAmCurrently)
     }//end of update()
 
     private bool hasReturnedToIdlePosition()
     {
-        if(transform.position.z > -2 && transform.position.z < 3)
+        float distance = distanceToOriginalPosition();
+
+        if(distance <=3)
         {
             return true;
         }
@@ -133,7 +126,9 @@ public class PlayerControl : MonoBehaviour
 
     private bool hasReachedTarget()
     {
-        if(transform.position.z >= -6 && transform.position.z <= 6)
+        float distance = getDistanceToEnemy();
+
+        if(distance <= 3)
         {
             return true;
         }
@@ -202,7 +197,7 @@ public class PlayerControl : MonoBehaviour
     {
         IAmCurrently = PlayerModes.MoveToAttack;
         animate.SetBool("battleIdle", false);
-        animate.SetBool("isRunning", true);
+        animate.SetBool("IsRunning", true);
 
     }//end of move to target
 
@@ -220,5 +215,30 @@ public class PlayerControl : MonoBehaviour
     public void pointBack()
     {
         transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+    }
+
+    private float getDistanceToEnemy()
+    {
+        Vector3 playerToEnemy;
+        float distance;
+
+        playerToEnemy = new Vector3(enemy.transform.position.x - transform.position.x, enemy.transform.position.y - transform.position.y, enemy.transform.position.z - transform.position.z);
+        distance = Mathf.Sqrt((playerToEnemy.x * playerToEnemy.x) + (playerToEnemy.y * playerToEnemy.y) + (playerToEnemy.z * playerToEnemy.z));
+
+        return distance;
+
+    }
+
+    private float distanceToOriginalPosition()
+    {
+
+        Vector3 playerToOriginalPos;
+        float distance;
+
+        playerToOriginalPos = new Vector3(playerPositionBeforeAttack.x - transform.position.x, playerPositionBeforeAttack.y - transform.position.y, playerPositionBeforeAttack.z - transform.position.z);
+        distance = Mathf.Sqrt((playerToOriginalPos.x * playerToOriginalPos.x) + (playerToOriginalPos.y * playerToOriginalPos.y) + (playerToOriginalPos.z * playerToOriginalPos.z));
+
+        return distance;
+
     }
 }

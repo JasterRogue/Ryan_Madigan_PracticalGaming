@@ -44,10 +44,6 @@ public class Chest : MonoBehaviour {
 
         //myInventory = GameObject.Find("Inventory").GetComponent<Inventory>();
 
-        
-
-
-
     }//end of start()
 	
 	// Update is called once per frame
@@ -57,7 +53,6 @@ public class Chest : MonoBehaviour {
         {
             checkDistanceToPlayer();
         }
-
         
 	}//end of update()
 

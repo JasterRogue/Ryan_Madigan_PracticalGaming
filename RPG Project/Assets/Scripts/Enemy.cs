@@ -87,8 +87,10 @@ public class Enemy : Character {
             variedPercent = UnityEngine.Random.Range(0, 21);
             variedDamage = ((damage * variedPercent) / 100);
             damage = damage + variedDamage;
-            print("Enemy:  " + damage);
-            playerStats.setHP(playerStats.getHP() - damage);
+            //print("Enemy:  " + damage);
+            //playerStats.setHP(playerStats.getHP() - damage);
+
+            applyDamage(damage);
 
             playerStats.isPlayerTurn = true;
         }
@@ -114,5 +116,10 @@ public class Enemy : Character {
     public void enemyDamageTaken(int damage)
     {
         setHP(getHP() - damage);
+    }
+
+    public void applyDamage(int damage)
+    {
+        playerStats.setHP(playerStats.getHP() - damage);
     }
 }

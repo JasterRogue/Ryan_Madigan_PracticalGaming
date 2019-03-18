@@ -10,7 +10,7 @@ public class Player : Character {
 
     PlayerModes currently = PlayerModes.WaitForTurn;
     public bool isPlayerTurn;
-    int damage;
+    public int damage;
     int chanceOfCritical;
     int variedDamage;
     int variedPercent;
@@ -154,7 +154,7 @@ public class Player : Character {
 
         //enemyStats.enemyDamageTaken(damage);
 
-        enemyStats.setHP(enemyStats.getHP() - damage);
+        //enemyStats.setHP(enemyStats.getHP() - damage);
         print("Enemy HP in Player: " + enemyStats.getHP());
 
     }
@@ -172,5 +172,15 @@ public class Player : Character {
     void playerHasDied()
     {
         isPlayerAlive = false;
+    }
+
+    public void applyDamage(int damage)
+    {
+        enemyStats.setHP(enemyStats.getHP() - damage);
+    }
+
+    public void DamageCall()
+    {
+        applyDamage(damage);
     }
 }//end of class

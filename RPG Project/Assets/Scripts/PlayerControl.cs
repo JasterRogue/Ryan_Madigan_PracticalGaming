@@ -16,6 +16,8 @@ public class PlayerControl : MonoBehaviour
     private int stepCountdown;
     Enemy enemy;
     Vector3 playerPositionBeforeAttack;
+    Player myPlayer;
+    float waitTimer=0.0f;
 
 
     // Use this for initialization
@@ -23,6 +25,7 @@ public class PlayerControl : MonoBehaviour
    
         animate = GetComponentInChildren<Animator>();
         enemy = FindObjectOfType<Enemy>();
+        myPlayer = FindObjectOfType<Player>();
     
 	}
 
@@ -65,6 +68,7 @@ public class PlayerControl : MonoBehaviour
 
                 animate.SetBool("battleIdle", true);
                 playerPositionBeforeAttack = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                waitTimer = 0f;
 
                 break;
 
@@ -77,6 +81,7 @@ public class PlayerControl : MonoBehaviour
                     IAmCurrently = PlayerModes.Melee_Attack;
                     animate.SetBool("leftPunch", true);
                     animate.SetBool("battleIdle", false);
+                    myPlayer.DamageCall();
 
                 }
 
@@ -84,25 +89,27 @@ public class PlayerControl : MonoBehaviour
             case PlayerModes.Melee_Attack:
 
                 AnimatorClipInfo[] info = animate.GetCurrentAnimatorClipInfo(0);
-               // print(info[0].clip.name);
 
-                if (info[0].clip.name == "hk_rh_right_A") //animate.melee_Attack_Finished()
+                if (info[0].clip.name == "hk_rh_right_A") //animation finished return to position
                 {
                     //this.animate.GetCurrentAnimatorStateInfo(0).IsName("hk_rh_right_A")
 
-                    print("Moving back");
+                    //print("Moving back");
+
+                    waitTimer += Time.deltaTime;
 
                     /*pointBack();
                     moveInBattle();
                     animate.SetBool("IsRunning", true);
                     animate.SetBool("leftPunch", false);*/
-                    transform.position = new Vector3(0, 0, 0);
 
-                   // if (hasReturnedToIdlePosition())
-                   // {
+                    if (hasReturnedToIdlePosition() && waitTimer >= 0.5f)
+                    {
+                        transform.position = new Vector3(-0.6f, 0, -10.67f);
                         IAmCurrently = PlayerModes.Battle_Idle;
+                        animate.SetBool("IsRunning", false);
                         pointForward();
-                   // }
+                    }
                 }
                 break;
 
@@ -116,7 +123,7 @@ public class PlayerControl : MonoBehaviour
     {
         float distance = distanceToOriginalPosition();
 
-        if(distance <=3)
+        if(distance <=30)
         {
             return true;
         }

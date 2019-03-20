@@ -12,6 +12,7 @@ public class Enemy : Character {
     int variedPercent;
     UnityEngine.Random randomCritical = new UnityEngine.Random();
     Player playerStats;
+    PlayerControl myPlayerControl;
     public bool isEnemyAlive;
 
     public Enemy()
@@ -36,6 +37,8 @@ public class Enemy : Character {
     {
         playerStats = GameObject.Find("char_ethan").GetComponent<Player>();
 
+        myPlayerControl = GameObject.FindObjectOfType<PlayerControl>();
+
         Global.manager.ImHere(this);
         
     }
@@ -53,8 +56,10 @@ public class Enemy : Character {
             GameObject.Destroy(gameObject);
             EnemyHasDied();
         }
-		
-	}
+
+   
+
+    }
 
     public void setup()
     {
@@ -92,7 +97,9 @@ public class Enemy : Character {
 
             applyDamage(damage);
 
-            playerStats.isPlayerTurn = true;
+            myPlayerControl.playerKnockdown();
+
+
         }
 
         else

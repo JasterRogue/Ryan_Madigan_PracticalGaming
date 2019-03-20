@@ -18,6 +18,7 @@ public class PlayerControl : MonoBehaviour
     Vector3 playerPositionBeforeAttack;
     Player myPlayer;
     float waitTimer=0.0f;
+    AnimatorClipInfo[] info;
 
 
     // Use this for initialization
@@ -88,7 +89,7 @@ public class PlayerControl : MonoBehaviour
                 break;
             case PlayerModes.Melee_Attack:
 
-                AnimatorClipInfo[] info = animate.GetCurrentAnimatorClipInfo(0);
+                 info = animate.GetCurrentAnimatorClipInfo(0);
 
                 if (info[0].clip.name == "hk_rh_right_A") //animation finished return to position
                 {
@@ -105,7 +106,7 @@ public class PlayerControl : MonoBehaviour
 
                     if (hasReturnedToIdlePosition() && waitTimer >= 0.5f)
                     {
-                        transform.position = new Vector3(-0.6f, 0, -10.67f);
+                        transform.position = new Vector3(-0.6f, 0, -9.57f);
                         IAmCurrently = PlayerModes.Battle_Idle;
                         animate.SetBool("IsRunning", false);
                         pointForward();
@@ -119,7 +120,7 @@ public class PlayerControl : MonoBehaviour
 
     }//end of update()
 
-    private bool hasReturnedToIdlePosition()
+    public bool hasReturnedToIdlePosition()
     {
         float distance = distanceToOriginalPosition();
 
@@ -247,5 +248,21 @@ public class PlayerControl : MonoBehaviour
 
         return distance;
 
+    }
+
+    public void playerKnockdown()
+    {
+        animate.SetBool("isKnockedDown", true);
+
+        info = animate.GetCurrentAnimatorClipInfo(0);
+
+       // print("kcockdown called");
+
+        if (info[0].clip.name == "getup_A")
+        {
+            animate.SetBool("isKnockedDown", false);
+
+            print("kcock is false");
+        }
     }
 }

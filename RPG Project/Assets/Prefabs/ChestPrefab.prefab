@@ -20,9 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4550228641282198}
   - component: {fileID: 33529219750484278}
-  - component: {fileID: 65395769439699566}
   - component: {fileID: 23413351156119270}
-  - component: {fileID: 114647081734696990}
+  - component: {fileID: 95645538468707580}
   m_Layer: 0
   m_Name: ChestPrefab
   m_TagString: Untagged
@@ -37,8 +36,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1515401038465230}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.07083225, y: 0.3, z: 8.2}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: -0.055425007, y: 0, z: -0.084886014}
+  m_LocalScale: {x: 0.683225, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -57,7 +56,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: b8e84f76f38774e44a245946984fc840, type: 2}
+  - {fileID: 2100000, guid: f31db9e206b58384490318463968b339, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -65,7 +64,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
+  m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0
@@ -83,29 +82,21 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1515401038465230}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65395769439699566
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1515401038465230}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114647081734696990
-MonoBehaviour:
+  m_Mesh: {fileID: 4300000, guid: 9352798a0e9d8494184378c37eee865b, type: 3}
+--- !u!95 &95645538468707580
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1515401038465230}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 738dfe35422a3a7428d338828f47e938, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemInChest: 
-  itemTextTime: 0
+  m_Avatar: {fileID: 9000000, guid: 9352798a0e9d8494184378c37eee865b, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1

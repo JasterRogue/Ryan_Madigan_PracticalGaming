@@ -1,29 +1,25 @@
 fileFormatVersion: 2
-guid: fe34edcc8a1aeb54da22ee521344ea99
-timeCreated: 18446744011573954816
+guid: 9352798a0e9d8494184378c37eee865b
+timeCreated: 1553197994
+licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
-    100002: prop_wallPanel_C
-    100004: prop_wallPanel_C_lo_003
-    100006: prop_wallPanel_C_lo_004
-    100008: transform1
-    100010: transform2
     400000: //RootNode
-    400002: prop_wallPanel_C
-    400004: prop_wallPanel_C_lo_003
-    400006: prop_wallPanel_C_lo_004
-    400008: transform1
-    400010: transform2
-    2300000: prop_wallPanel_C
-    3300000: prop_wallPanel_C
-    4300000: prop_wallPanel_C
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Chest
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ChestTexture
+    second: {fileID: 2100000, guid: f31db9e206b58384490318463968b339, type: 2}
   materials:
     importMaterials: 1
-    materialName: 1
+    materialName: 0
     materialSearch: 1
     materialLocation: 0
   animations:
@@ -50,13 +46,13 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.01
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importVisibility: 0
+    importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
+    importCameras: 1
+    importLights: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -67,13 +63,13 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 4
-    normalCalculationMode: 0
-  importAnimation: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
@@ -90,11 +86,11 @@ ModelImporter:
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
-    skeletonHasParents: 0
+    skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
-  additionalBone: 1
+  additionalBone: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

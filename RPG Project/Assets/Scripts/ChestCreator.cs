@@ -14,15 +14,7 @@ public class ChestCreator : MonoBehaviour {
 
         allChests = new List<Chest>();
 
-
-
-        allChests.Add (createNewChest(new Vector3(5, 1, 5), new Weapon("sting", 5)));
-
-
-
-        Instantiate(chest, new Vector3(1, 1, 3), Quaternion.identity);
-        
-
+        allChests.Add (createNewChest(new Vector3(5, 1, 5), new Weapon("Claw", 3)));
 }
 
     private Chest createNewChest(Vector3 positionOfChest, Item chestContents)
@@ -36,7 +28,8 @@ public class ChestCreator : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update ()
+    {
 		
 	}
 }

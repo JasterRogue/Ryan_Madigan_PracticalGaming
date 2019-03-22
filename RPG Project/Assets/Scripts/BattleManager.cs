@@ -69,7 +69,7 @@ public class BattleManager : MonoBehaviour
 
     internal void StepCountReached()
     {
-        SceneManager.LoadScene("Battle Scene");
+        /*SceneManager.LoadScene("Battle Scene");
         inBattle = true;
 
         combatants = new List<Character>();
@@ -78,7 +78,7 @@ public class BattleManager : MonoBehaviour
         //for(int i = 0; i < combatants.Count; i++)
         //{
         //    print("Combatant" + combatants[i]);
-        //}
+        //}*/
 
     }
 

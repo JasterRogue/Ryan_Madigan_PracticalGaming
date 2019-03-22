@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CamControl : MonoBehaviour {
 
-    public Transform target, player;
+    public Transform target;
     public Transform obstruction;
     float zoomSpeed = 2f;
     PlayerControl myPlayerControl;
@@ -29,14 +29,14 @@ public class CamControl : MonoBehaviour {
     {
         RaycastHit hit;
 
-        if(Physics.Raycast(transform.position, target.position - transform.position, out hit, 20f))
+        if(Physics.Raycast(transform.position, target.position - transform.position, out hit, 4.5f))
         {
             if(hit.collider.gameObject.tag != "Player")
             {
                 obstruction = hit.transform;
                 obstruction.gameObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
 
-                if(Vector3.Distance(obstruction.position, transform.position) >=13f && Vector3.Distance(transform.position, target.position) >= 10f)
+                if(Vector3.Distance(obstruction.position, transform.position) >=3f && Vector3.Distance(transform.position, target.position) >= 1.5f)
                 {
                     transform.Translate(Vector3.forward * zoomSpeed * Time.deltaTime);
                 }
@@ -44,10 +44,10 @@ public class CamControl : MonoBehaviour {
                 else
                 {
                     obstruction.gameObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
-                    if (Vector3.Distance(transform.position, target.position) < 20f)
+                    if (Vector3.Distance(transform.position, target.position) < 4.5f)
                         transform.Translate(Vector3.back * zoomSpeed * Time.deltaTime);
                 }
             }
         }
-    }
+    }//end of viewObstructed()
 }

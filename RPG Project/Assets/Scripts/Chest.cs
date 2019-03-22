@@ -17,7 +17,7 @@ public class Chest : MonoBehaviour {
 
     internal void YouContain(Item newItem)
     {
-        //myInventory.addTo(newItem);
+        myInventory.addTo(newItem);
     }
 
     public float itemTextTime = 0.0f;
@@ -40,7 +40,7 @@ public class Chest : MonoBehaviour {
 
         generateItemToBeInChest();
 
-        myTextDisplay = GameObject.Find("TextBox").GetComponent<TextDisplay>();
+        myTextDisplay = FindObjectOfType<TextDisplay>();
 
         //myInventory = GameObject.Find("Inventory").GetComponent<Inventory>();
 

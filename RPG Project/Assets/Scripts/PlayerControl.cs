@@ -106,7 +106,7 @@ public class PlayerControl : MonoBehaviour
 
                     if (hasReturnedToIdlePosition() && waitTimer >= 0.5f)
                     {
-                        transform.position = new Vector3(-0.6f, 0, -9.57f);
+                        transform.position = new Vector3(0, 0, -4.57f);
                         IAmCurrently = PlayerModes.Battle_Idle;
                         animate.SetBool("IsRunning", false);
                         pointForward();
@@ -262,7 +262,7 @@ public class PlayerControl : MonoBehaviour
         {
             animate.SetBool("isKnockedDown", false);
 
-            print("kcock is false");
+            print("knock is false");
         }
     }
 }

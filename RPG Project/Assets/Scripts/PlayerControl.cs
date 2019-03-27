@@ -93,16 +93,8 @@ public class PlayerControl : MonoBehaviour
 
                 if (info[0].clip.name == "hk_rh_right_A") //animation finished return to position
                 {
-                    //this.animate.GetCurrentAnimatorStateInfo(0).IsName("hk_rh_right_A")
-
-                    //print("Moving back");
-
+            
                     waitTimer += Time.deltaTime;
-
-                    /*pointBack();
-                    moveInBattle();
-                    animate.SetBool("IsRunning", true);
-                    animate.SetBool("leftPunch", false);*/
 
                     if (hasReturnedToIdlePosition() && waitTimer >= 0.5f)
                     {
@@ -112,9 +104,8 @@ public class PlayerControl : MonoBehaviour
                         pointForward();
                     }
                 }
-                break;
 
-    
+                break;
 
         }//end of switch(iAmCurrently)
 

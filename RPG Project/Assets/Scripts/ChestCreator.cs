@@ -15,6 +15,7 @@ public class ChestCreator : MonoBehaviour {
         allChests = new List<Chest>();
 
         allChests.Add (createNewChest(new Vector3(5, 1, 5), new Weapon("Claw", 3)));
+
 }
 
     private Chest createNewChest(Vector3 positionOfChest, Item chestContents)

@@ -57,19 +57,47 @@ public class BattleManager : MonoBehaviour
         
     }
 
+    internal void MagicButtonPressed()
+    {
+        if (whosTurn == indexOfPlayer)
+        {
+            (combatants[indexOfPlayer] as Player).MagicCast();
+            player.magicAttack();
+            playerAttacking = true;
+        }
+
+        if (!enemy)
+        {
+            enemy = FindObjectOfType<Enemy>();
+        }//if enemy doesnt exist find it
+
+        if (enemy)
+        {
+            playerAttacking = false;
+            enemy.enemyTurn();
+        }
+
+        if (!myBattleText)
+        {
+            myBattleText = FindObjectOfType<BattleText>();
+        }
+
+
+        if (myBattleText)
+        {
+            myBattleText.setUpStats();
+        }
+    }
+
     internal void ImHere(Enemy newplayer)
     {
-
-
         combatants.Add(newplayer);
-
-
 
     }
 
     internal void StepCountReached()
     {
-        /*SceneManager.LoadScene("Battle Scene");
+        SceneManager.LoadScene("Battle Scene");
         inBattle = true;
 
         combatants = new List<Character>();
@@ -78,7 +106,7 @@ public class BattleManager : MonoBehaviour
         //for(int i = 0; i < combatants.Count; i++)
         //{
         //    print("Combatant" + combatants[i]);
-        //}*/
+        //}
 
     }
 

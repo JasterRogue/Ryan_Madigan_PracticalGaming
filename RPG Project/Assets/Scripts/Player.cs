@@ -159,9 +159,30 @@ public class Player : Character {
 
     }
 
+    public void magicAttack()
+    {
+        damage = (((getIntelligence() * 3)) - enemyStats.getSpecialDefence());
+
+        if(damage < 1)
+        {
+            damage = 1;
+        }
+
+        variedPercent = UnityEngine.Random.Range(0, 21);
+        variedDamage = ((damage * variedPercent) / 100);
+        damage = damage + variedDamage;
+
+    }
+
     internal void MeleeAttack()
     {
         animateChar.initiateMeleeAttack();
+        //activates attack animation
+    }
+
+    internal void MagicCast()
+    {
+        //add code for magic cast
     }
 
     internal override void waitForAttackChoice()
@@ -176,11 +197,13 @@ public class Player : Character {
 
     public void applyDamage(int damage)
     {
+        //applies damage calculated
         enemyStats.setHP(enemyStats.getHP() - damage);
     }
 
     public void DamageCall()
     {
+        //this method calls the the method to apply damage that was calculated
         applyDamage(damage);
     }
 }//end of class

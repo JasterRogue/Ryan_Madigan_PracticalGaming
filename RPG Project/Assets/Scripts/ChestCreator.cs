@@ -23,7 +23,7 @@ public class ChestCreator : MonoBehaviour {
         Transform newChestGO = (Transform)Instantiate(chest, positionOfChest, Quaternion.identity);
         Chest newChest = newChestGO.gameObject.GetComponent<Chest>();
 
-        newChest.YouContain(chestContents);
+        //newChest.YouContain(chestContents);
 
         return newChest;
     }

@@ -14,6 +14,7 @@ public class Enemy : Character {
     Player playerStats;
     PlayerControl myPlayerControl;
     public bool isEnemyAlive;
+    Animator myAnimator;
 
     public Enemy()
     {
@@ -40,6 +41,8 @@ public class Enemy : Character {
         myPlayerControl = GameObject.FindObjectOfType<PlayerControl>();
 
         Global.manager.ImHere(this);
+
+        myAnimator = GetComponent<Animator>();
         
     }
 	
@@ -69,6 +72,8 @@ public class Enemy : Character {
 
     public void enemyTurn()
     {
+
+
 
         if (getHP() > 1)
         {
@@ -106,6 +111,7 @@ public class Enemy : Character {
         {
             GameObject.Destroy(gameObject);
             EnemyHasDied();
+            myAnimator.SetBool("isDead", true);
         }
 
     }
@@ -128,5 +134,10 @@ public class Enemy : Character {
     public void applyDamage(int damage)
     {
         playerStats.setHP(playerStats.getHP() - damage);
+    }
+
+    void runToPlayer()
+    {
+
     }
 }

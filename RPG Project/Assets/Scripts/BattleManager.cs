@@ -138,7 +138,6 @@ public class BattleManager : MonoBehaviour
 
         if(enemy && inBattle)
         {
-            print("Enemy HP: " + enemy.getHP());
 
              if(enemy.getHP()<1)
                {

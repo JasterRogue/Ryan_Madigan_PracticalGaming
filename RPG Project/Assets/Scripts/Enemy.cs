@@ -15,10 +15,11 @@ public class Enemy : Character {
     PlayerControl myPlayerControl;
     public bool isEnemyAlive;
     Animator myAnimator;
+	Vector3 originalPosition;
 
     public Enemy()
     {
-        setCharacterName("Cube of Destruction");
+        setCharacterName("Bandit");
         setLevel(1);
         setMaxHP(80);
         setMaxMP(50);
@@ -60,6 +61,18 @@ public class Enemy : Character {
             EnemyHasDied();
         }
 
+		if(myAnimator.GetBool("isRunning") && !hasReachedPlayer())
+		{
+			runToPlayer ();
+		}
+
+		if (hasReachedPlayer ())
+		{
+			myAnimator.SetBool ("isAttacking", true);
+		}
+
+
+
    
 
     }
@@ -72,39 +85,44 @@ public class Enemy : Character {
 
     public void enemyTurn()
     {
-
-
+		//list of attack
+		//1 melee, 2 range, 3 heal
 
         if (getHP() > 1)
         {
             playerStats.isPlayerTurn = false;
 
-            //calculates  the damage output
-            damage = ((getStrength() * 2) - playerStats.getDefence());
-            chanceOfCritical = UnityEngine.Random.Range(1, 101);
+           	//decide on move
 
-            if (damage < 1)
-            {
-                //opponents defence could be so high that the damage ends up as negative number
-                damage = 1;
-            }
+			if (getHP () < getMaxHP () / 4 && getMP () >= 8) {
+				//use heal
+				setHP (getHP () + 30);
+				setMP (getMP () - 8); 
+			} 
 
-            if (chanceOfCritical <= getLuck())
-            {
-                damage = (damage + (damage / 2));
-            }
+			else if (getMP () >= 10)
+			{
+				setMP (getMP () - 10);
+				//do magic attack
+			}
 
-            variedPercent = UnityEngine.Random.Range(0, 21);
-            variedDamage = ((damage * variedPercent) / 100);
-            damage = damage + variedDamage;
-            //print("Enemy:  " + damage);
-            //playerStats.setHP(playerStats.getHP() - damage);
+			else
+			{
+				originalPosition = new Vector3 (transform.position.x, transform.position.y, transform.position.z);
+				//do melee attack
+				calculateMeleeDamage();
 
-            applyDamage(damage);
+				//run to player
+				myAnimator.SetBool("isRunning", true);
+				//do attack
+				applyDamage(damage);
 
-            myPlayerControl.playerKnockdown();
+				myPlayerControl.playerKnockdown();
 
-
+				//go back to position
+				transform.position = originalPosition;
+			}
+		
         }
 
         else
@@ -114,7 +132,7 @@ public class Enemy : Character {
             myAnimator.SetBool("isDead", true);
         }
 
-    }
+	}//end of enemyTurn()
 
     private void EnemyHasDied()
     {
@@ -138,6 +156,43 @@ public class Enemy : Character {
 
     void runToPlayer()
     {
+		myAnimator.SetBool ("isRunning", true);
+		transform.Translate(Vector3.forward * Time.deltaTime);
 
     }
+
+	public void calculateMeleeDamage()
+	{
+		//calculates  the damage output
+		damage = ((getStrength() * 2) - playerStats.getDefence());
+		chanceOfCritical = UnityEngine.Random.Range(1, 101);
+
+		if (damage < 1)
+		{
+			//opponents defence could be so high that the damage ends up as negative number
+			damage = 1;
+		}
+
+		if (chanceOfCritical <= getLuck())
+		{
+			damage = (damage + (damage / 2));
+		}
+
+		variedPercent = UnityEngine.Random.Range(0, 21);
+		variedDamage = ((damage * variedPercent) / 100);
+		damage = damage + variedDamage;
+
+
+	}
+
+	public bool hasReachedPlayer()
+	{
+		if (Vector3.Distance (transform.position, myPlayerControl.transform.position) <= 5) {
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 }

@@ -18,8 +18,6 @@ public abstract class Character : MonoBehaviour {
     public int agility;
     public int luck;
 
-
-
     //Constructors
     public Character()
     {

@@ -200,6 +200,13 @@ public class PlayerControl : MonoBehaviour
 
     }//end of move to target
 
+    public void initiateMagicAttack()
+    {
+        IAmCurrently = PlayerModes.Range_Attack;
+        animate.SetBool("battleIdle", false);
+       // animate.SetBool();
+    }
+
     public void moveInBattle()
     {
         transform.Translate(Vector3.forward * Time.deltaTime);
@@ -245,11 +252,11 @@ public class PlayerControl : MonoBehaviour
     {
         animate.SetBool("isKnockedDown", true);
 
-        info = animate.GetCurrentAnimatorClipInfo(0);
+       // info = animate.GetCurrentAnimatorClipInfo(0);
 
-       // print("kcockdown called");
+       // print("knockdown called");
 
-        if (info[0].clip.name == "getup_A")
+        if (animate.GetCurrentAnimatorStateInfo(0).IsName("knockdown_A"))
         {
             animate.SetBool("isKnockedDown", false);
 

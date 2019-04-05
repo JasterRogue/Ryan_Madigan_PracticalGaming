@@ -26,6 +26,8 @@ public class BattleText : MonoBehaviour {
         setUpStats();
         
         
+        
+        
    
     }
 	

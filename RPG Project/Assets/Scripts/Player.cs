@@ -47,10 +47,6 @@ public class Player : Character {
         animateChar = GetComponent<PlayerControl>();
         isPlayerAlive = true;
 
-        //   enemyStats = GameObject.Find("CubeOfDestruction").GetComponent<Enemy>();
-
-
-
     }//end of start()
 	
 	// Update is called once per frame
@@ -150,12 +146,6 @@ public class Player : Character {
         variedPercent = UnityEngine.Random.Range(0, 21);
         variedDamage = ((damage * variedPercent) / 100);
         damage = damage + variedDamage;
-        print(damage);
-
-        //enemyStats.enemyDamageTaken(damage);
-
-        //enemyStats.setHP(enemyStats.getHP() - damage);
-        print("Enemy HP in Player: " + enemyStats.getHP());
 
     }
 
@@ -182,7 +172,8 @@ public class Player : Character {
 
     internal void MagicCast()
     {
-        //add code for magic cast
+        //activates magic attack animation
+        animateChar.initiateMagicAttack();
     }
 
     internal override void waitForAttackChoice()

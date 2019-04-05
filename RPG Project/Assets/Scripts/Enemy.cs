@@ -25,7 +25,7 @@ public class Enemy : Character {
         setMaxMP(50);
         setHP(getMaxHP());
         setMP(getMaxMP());
-        setStrength(80);
+        setStrength(8);
         setDefence(6);
         setIntelligence(4);
         setSpecialDefence(12);
@@ -61,20 +61,73 @@ public class Enemy : Character {
             EnemyHasDied();
         }
 
-		if(myAnimator.GetBool("isRunning") && !hasReachedPlayer())
-		{
-			runToPlayer ();
-		}
+        if (myAnimator)
+        {
+            if (myAnimator.GetBool("isRunning") && !hasReachedPlayer() && myAnimator)
+            {
+                runToPlayer();
+            }
+        }
+
+        else
+        {
+            myAnimator = GetComponent<Animator>();
+        }
 
 		if (hasReachedPlayer ())
 		{
 			myAnimator.SetBool ("isAttacking", true);
-		}
 
+            if(myAnimator.GetCurrentAnimatorStateInfo(0).IsName("hk_side_left_A"))
+            {
+                myPlayerControl.playerKnockdown();
+            }
+		}    
+    }
 
+    public void updateStats()
+    {
+        if(playerStats.getLevel() >= 1 && playerStats.getLevel() <= 4)
+        {
+            setMaxHP(80);
+            setMaxMP(50);
+            setHP(getMaxHP());
+            setMP(getMaxMP());
+            setStrength(8);
+            setDefence(6);
+            setIntelligence(4);
+            setSpecialDefence(12);
+            setAgility(8);
+            setLuck(4);
+        }
 
-   
+        if (playerStats.getLevel() >= 5 && playerStats.getLevel() <= 12)
+        {
+            setMaxHP(170);
+            setMaxMP(90);
+            setHP(getMaxHP());
+            setMP(getMaxMP());
+            setStrength(18);
+            setDefence(15);
+            setIntelligence(12);
+            setSpecialDefence(12);
+            setAgility(18);
+            setLuck(9);
+        }
 
+        if (playerStats.getLevel() >= 13 && playerStats.getLevel() <= 30)
+        {
+            setMaxHP(280);
+            setMaxMP(155);
+            setHP(getMaxHP());
+            setMP(getMaxMP());
+            setStrength(32);
+            setDefence(27);
+            setIntelligence(20);
+            setSpecialDefence(21);
+            setAgility(35);
+            setLuck(16);
+        }
     }
 
     public void setup()
@@ -97,13 +150,21 @@ public class Enemy : Character {
 			if (getHP () < getMaxHP () / 4 && getMP () >= 8) {
 				//use heal
 				setHP (getHP () + 30);
-				setMP (getMP () - 8); 
+				setMP (getMP () - 8);
+                print("Magic heal");
 			} 
 
 			else if (getMP () >= 10)
 			{
 				setMP (getMP () - 10);
-				//do magic attack
+                print("Magic Attack");
+                calculateMagicDamage();
+
+                myAnimator.SetBool("isCastingMagic", true);
+                //do magic attack
+                applyDamage(damage);
+
+               // myAnimator.SetBool("isCastingMagic", false);
 			}
 
 			else
@@ -117,11 +178,11 @@ public class Enemy : Character {
 				//do attack
 				applyDamage(damage);
 
-				myPlayerControl.playerKnockdown();
-
 				//go back to position
 				transform.position = originalPosition;
 			}
+
+            playerStats.isPlayerTurn = true;
 		
         }
 
@@ -185,9 +246,24 @@ public class Enemy : Character {
 
 	}
 
+    public void calculateMagicDamage()
+    {
+        damage = ((getIntelligence() * 3) - playerStats.getSpecialDefence());
+
+        if (damage < 1)
+        {
+            //opponents defence could be so high that the damage ends up as negative number
+            damage = 1;
+        }
+
+        variedPercent = UnityEngine.Random.Range(0, 21);
+        variedDamage = ((damage * variedPercent) / 100);
+        damage = damage + variedDamage;
+    }
+
 	public bool hasReachedPlayer()
 	{
-		if (Vector3.Distance (transform.position, myPlayerControl.transform.position) <= 5) {
+		if (Vector3.Distance (transform.position, myPlayerControl.transform.position) <= 4) {
 			return true;
 		}
 		else

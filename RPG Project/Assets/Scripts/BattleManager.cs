@@ -35,7 +35,6 @@ public class BattleManager : MonoBehaviour
     void Start()
     {
         stepsToBattle = UnityEngine.Random.Range(150, 301);
-        print(stepsToBattle);
         DontDestroyOnLoad(gameObject);
         SceneManager.LoadScene("Menu Scene");
 
@@ -93,6 +92,8 @@ public class BattleManager : MonoBehaviour
     {
         combatants.Add(newplayer);
 
+        newplayer.updateStats();
+
     }
 
     internal void StepCountReached()
@@ -103,11 +104,6 @@ public class BattleManager : MonoBehaviour
         combatants = new List<Character>();
   
         currently = BattlePhase.InformOfTurn;
-        //for(int i = 0; i < combatants.Count; i++)
-        //{
-        //    print("Combatant" + combatants[i]);
-        //}
-
     }
 
     // Update is called once per frame
@@ -160,8 +156,6 @@ public class BattleManager : MonoBehaviour
                         //Game over sequence;
                         inBattle = false;
                         Initiate.Fade("Game Over", Color.black, 5);
-                
-
                     }
         }//end of if player exists
 
@@ -214,9 +208,6 @@ public class BattleManager : MonoBehaviour
         {
             myBattleText.setUpStats();
         }
-
-
-
         
     }
 

@@ -51,7 +51,10 @@ public class BattleManager : MonoBehaviour
         myPlayerControl.StepsToNextBattleIs(stepsToBattle, inBattle);
 
         combatants.Add(player);
+
         indexOfPlayer = combatants.IndexOf(player);
+
+        whosTurn = indexOfPlayer;
         
         
     }

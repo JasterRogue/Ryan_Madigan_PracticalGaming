@@ -16,6 +16,7 @@ public class Enemy : Character {
     public bool isEnemyAlive;
     Animator myAnimator;
 	Vector3 originalPosition;
+    AnimatorClipInfo[] info;
 
     public Enemy()
     {
@@ -61,18 +62,7 @@ public class Enemy : Character {
             EnemyHasDied();
         }
 
-        if (myAnimator)
-        {
-            if (myAnimator.GetBool("isRunning") && !hasReachedPlayer() && myAnimator)
-            {
-                runToPlayer();
-            }
-        }
 
-        else
-        {
-            myAnimator = GetComponent<Animator>();
-        }
 
 		if (hasReachedPlayer ())
 		{
@@ -128,7 +118,7 @@ public class Enemy : Character {
             setAgility(35);
             setLuck(16);
         }
-    }
+    }//updates enemy stats based on player level
 
     public void setup()
     {
@@ -147,9 +137,19 @@ public class Enemy : Character {
 
            	//decide on move
 
-			if (getHP () < getMaxHP () / 4 && getMP () >= 8) {
-				//use heal
-				setHP (getHP () + 30);
+			if (getHP () < getMaxHP () / 4 && getMP () >= 8)
+            {
+                //use heal
+
+                myAnimator.SetBool("isHealing", true);
+
+                info = myAnimator.GetCurrentAnimatorClipInfo(0);
+
+                if (info[0].clip.name == "Standing_2H_Cast_Spell_01")
+                {
+                    myAnimator.SetBool("isHealing", false);
+                }
+                setHP (getHP () + 30);
 				setMP (getMP () - 8);
                 print("Magic heal");
 			} 
@@ -164,7 +164,14 @@ public class Enemy : Character {
                 //do magic attack
                 applyDamage(damage);
 
-               // myAnimator.SetBool("isCastingMagic", false);
+                info = myAnimator.GetCurrentAnimatorClipInfo(0);
+
+                if (info[0].clip.name == "Standing_2H_Magic_Attack_02")
+                {
+                    myAnimator.SetBool("isCastingMagic", false);
+                }
+
+                
 			}
 
 			else
@@ -175,6 +182,12 @@ public class Enemy : Character {
 
 				//run to player
 				myAnimator.SetBool("isRunning", true);
+
+                while(!hasReachedPlayer())
+                {
+                    runToPlayer();
+                }
+
 				//do attack
 				applyDamage(damage);
 

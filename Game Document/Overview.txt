@@ -1,0 +1,5 @@
+This game is a turn based RPG.
+The player can run around a dungeon opening doors and chests.
+Once the player has done so many steps it will cause a battle to occur.
+The player will battle against the enemy and if they win will gain experience and eventually level up.
+Once the player reaches the end of the dungeon they will encounter a boss to fight against.

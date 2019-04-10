@@ -39,7 +39,8 @@ public class PlayerControl : MonoBehaviour
         {
 
             case PlayerModes.Wandering:
-        Camera.main.transform.position = transform.position + new Vector3(0, 5, -5);
+
+            Camera.main.transform.position = transform.position + new Vector3(0, 5, -5);
 
                 if (Input.GetKey(KeyCode.W))
                 {

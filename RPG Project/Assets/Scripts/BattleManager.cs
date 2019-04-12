@@ -54,8 +54,7 @@ public class BattleManager : MonoBehaviour
 
         indexOfPlayer = combatants.IndexOf(player);
 
-        whosTurn = indexOfPlayer;
-        
+        whosTurn = indexOfPlayer;       
         
     }
 
@@ -73,11 +72,7 @@ public class BattleManager : MonoBehaviour
             enemy = FindObjectOfType<Enemy>();
         }//if enemy doesnt exist find it
 
-        if (enemy)
-        {
-            playerAttacking = false;
-            enemy.enemyTurn();
-        }
+        
 
         if (!myBattleText)
         {
@@ -102,6 +97,7 @@ public class BattleManager : MonoBehaviour
     internal void StepCountReached()
     {
         SceneManager.LoadScene("Battle Scene");
+
         inBattle = true;
 
         combatants = new List<Character>();
@@ -112,12 +108,12 @@ public class BattleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (enemy && whosTurn != indexOfPlayer)
-        {
-            playerAttacking = false;
-            enemy.enemyTurn();
-        }
+        //if (enemy && whosTurn != indexOfPlayer && !enemy.isEnemyTurn)
+        //{
+        //    enemy.isEnemyTurn = true;
+        //    enemy.enemyTurn();
+        //    print("enemy turn called");
+        //}
 
         switch (currently)
         {
@@ -144,7 +140,6 @@ public class BattleManager : MonoBehaviour
 
         if(enemy && inBattle)
         {
-
              if(enemy.getHP()<1)
                {
                         SceneManager.LoadScene("Test Scene");
@@ -154,10 +149,8 @@ public class BattleManager : MonoBehaviour
                         currentExp += 30;
                         checkForLevelUp();
                         myPlayerControl.stepCount = 0;
-
                }
         }//end of if enemey exists
-
        
         if(player)
         {
@@ -202,17 +195,10 @@ public class BattleManager : MonoBehaviour
             enemy = FindObjectOfType<Enemy>();
         }//if enemy doesnt exist find it
 
-       /* if(enemy && whosTurn != indexOfPlayer)
-        {
-            playerAttacking = false;
-            enemy.enemyTurn();
-        } */
-
         if (!myBattleText)
         {
             myBattleText = FindObjectOfType<BattleText>();
         }
-
 
         if (myBattleText)
         {
@@ -220,6 +206,4 @@ public class BattleManager : MonoBehaviour
         }
         
     }
-
-  
 }//end of class

@@ -130,7 +130,7 @@ public class PlayerControl : MonoBehaviour
     {
         float distance = getDistanceToEnemy();
 
-        if(distance <= 3)
+        if(distance <= 2)
         {
             return true;
         }
@@ -250,7 +250,6 @@ public class PlayerControl : MonoBehaviour
         return distance;
 
     }
-
     public void playerKnockdown()
     {
         animate.SetBool("isKnockedDown", true);

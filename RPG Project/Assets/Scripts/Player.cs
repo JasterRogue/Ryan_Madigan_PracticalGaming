@@ -50,7 +50,8 @@ public class Player : Character {
     }//end of start()
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 
         switch (currently)
         {
@@ -111,6 +112,8 @@ public class Player : Character {
                
             }//end of else
 
+            recover();
+
         }//end of if(level<99)
     }//end of levelUp()
 
@@ -161,7 +164,6 @@ public class Player : Character {
         variedPercent = UnityEngine.Random.Range(0, 21);
         variedDamage = ((damage * variedPercent) / 100);
         damage = damage + variedDamage;
-
     }
 
     internal void MeleeAttack()

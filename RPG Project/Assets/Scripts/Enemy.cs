@@ -9,7 +9,6 @@ public class Enemy : Character {
     enum EnemyState { Idle, ChooseAction, MeleeAttack, MagicAttack, Heal, runTo}
     EnemyState isCurrently = EnemyState.Idle;
 
-
     int damage;
     int chanceOfCritical;
     int variedDamage;
@@ -21,6 +20,8 @@ public class Enemy : Character {
     Animator myAnimator;
 	Vector3 originalPosition;
     AnimatorClipInfo[] info;
+    public bool isEnemyTurn;
+    private bool magicAnimationStarted;
 
     public Enemy()
     {
@@ -48,169 +49,134 @@ public class Enemy : Character {
 
         Global.manager.ImHere(this);
 
-        myAnimator = GetComponent<Animator>();
-       
-        
+        myAnimator = GetComponent<Animator>();   
     }
 
     // Update is called once per frame
     void Update()
-
-
-
     {
-
-
-        switch (isCurrently)
+        if (getHP()>1)
         {
-            case EnemyState.Idle:
+            info = myAnimator.GetCurrentAnimatorClipInfo(0);
 
+            switch (isCurrently)
+            {
+                case EnemyState.Idle:
 
+                    break;
 
+                case EnemyState.ChooseAction:
 
-                break;
-
-            case EnemyState.ChooseAction:
-
-                if (getHP() < getMaxHP() / 4 && getMP() >= 8)
-                {
-                    //use heal
-
-                    myAnimator.SetBool("isHealing", true);
-
-                    info = myAnimator.GetCurrentAnimatorClipInfo(0);
-
-
-
-                    setHP(getHP() + 30);
-                    setMP(getMP() - 8);
-                    print("Magic heal");
-                    isCurrently = EnemyState.Heal;
-                }
-
-                else
-                {
-                    if (getMP() >= 10)
+                    if (getHP() < getMaxHP() / 4 && getMP() >= 8)
                     {
-                        setMP(getMP() - 10);
-                        print("Magic Attack");
-                        calculateMagicDamage();
+                        //use heal
 
-                        myAnimator.SetBool("isCastingMagic", true);
-                        //do magic attack
-                        applyDamage(damage);
+                        myAnimator.SetBool("isHealing", true);
 
-                        info = myAnimator.GetCurrentAnimatorClipInfo(0);
+             
 
-                        isCurrently = EnemyState.MagicAttack;
-
+                        setHP(getHP() + 30);
+                        setMP(getMP() - 8);
+                        print("Heal");
+                        isCurrently = EnemyState.Heal;
                     }
+
                     else
                     {
-                        originalPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-                        //do melee attack
-                        calculateMeleeDamage();
+                        if (getMP() >= 10)
+                        {
+                            setMP(getMP() - 10);
+                            print("Magic Attack");
+                            calculateMagicDamage();
+
+                            myAnimator.SetBool("isCastingMagic", true);
+                            //do magic attack
+                            applyDamage(damage);
+
+                    
+
+                            isCurrently = EnemyState.MagicAttack;
+                            magicAnimationStarted = false;
+
+                        }
+                        else
+                        {
+                            originalPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                            //do melee attack
+                            calculateMeleeDamage();
+
+                            isCurrently = EnemyState.runTo;
+                        }
+                    }
+
+                    break;
+
+                case EnemyState.Heal:
+
+                    if (info[0].clip.name == "idle_A")
+                    {
+                        myAnimator.SetBool("isHealing", false);
+                        isCurrently = EnemyState.Idle;
+                        TurnFinished();
+                        isEnemyTurn = false;
+                    }
+
+                    break;
+
+                case EnemyState.MagicAttack:
+
+                  
+
+                    if ((!magicAnimationStarted) && (info[0].clip.name == "Standing_2H_Magic_Attack_02")) magicAnimationStarted = true;
 
 
+                    if (magicAnimationStarted && (info[0].clip.name == "idle_A"))
+                    {
+                        myAnimator.SetBool("isCastingMagic", false);
+                        isCurrently = EnemyState.Idle;
+                        TurnFinished();
+                        isEnemyTurn = false;
+                    }
 
-                        isCurrently = EnemyState.runTo;
+                    break;
 
+                case EnemyState.runTo:
+
+                    runToPlayer();
+
+                    if (hasReachedPlayer())
+                    {
+                        isCurrently = EnemyState.MeleeAttack;
+                        myAnimator.SetBool("isAttacking", true);
 
                     }
-                }
 
+                    break;
 
-                break;
+                case EnemyState.MeleeAttack:
 
-            case EnemyState.Heal:
+                    if (info[0].clip.name == "idle_A")
+                    {
+                        myAnimator.SetBool("isAttacking", false);
+                        isCurrently = EnemyState.Idle;
+                        applyDamage(damage);
+                        transform.position = originalPosition;
+                        TurnFinished();
+                        isEnemyTurn = false;
+                    }
 
+                    break;
+            }//end of switch()
+        }
 
-                if (info[0].clip.name == "idle_A")
-                {
-                    myAnimator.SetBool("isHealing", false);
-                    isCurrently = EnemyState.Idle;
-                    TurnFinished();
-                }
-
-
-
-
-
-
-                break;
-
-            case EnemyState.MagicAttack:
-
-
-                if (info[0].clip.name == "idle_A")
-                {
-                    myAnimator.SetBool("isCastingMagic", false);
-                    isCurrently = EnemyState.Idle;
-                    TurnFinished();
-                }
-
-                break;
-
-            case EnemyState.runTo:
-
-
-                runToPlayer();
-
-                if (hasReachedPlayer())
-                {
-                    isCurrently = EnemyState.MeleeAttack;
-
-                }
-
-
-
-
-                break;
-
-
-            case EnemyState.MeleeAttack:
-
-                if (info[0].clip.name == "idle_A")
-                {
-                    myAnimator.SetBool("isAttacking", false);
-                    isCurrently = EnemyState.Idle;
-                    applyDamage(damage);
-                    transform.position = originalPosition;
-                    TurnFinished();
-                }
-
-                break;
-
-
-
-
-
-
+        else
+        {
+            //enemy is dead
+            //GameObject.Destroy(gameObject);
+            EnemyHasDied();
+            myAnimator.SetBool("isDead", true);
         }
     }
-  //      if(Global.manager.inBattle)
-  //      {
-  //          isEnemyAlive = true;
-  //      }
-
-  //      if(getHP()<1)
-  //      {
-  //          GameObject.Destroy(gameObject);
-  //          EnemyHasDied();
-  //      }
-
-
-
-		//if (hasReachedPlayer ())
-		//{
-		//	myAnimator.SetBool ("isAttacking", true);
-
-  //          if(myAnimator.GetCurrentAnimatorStateInfo(0).IsName("hk_side_left_A"))
-  //          {
-  //              myPlayerControl.playerKnockdown();
-  //          }
-		//}    
-  //  }
 
     public void updateStats()
     {
@@ -265,33 +231,7 @@ public class Enemy : Character {
 
     public void enemyTurn()
     {
-
         isCurrently = EnemyState.ChooseAction;
-
-		//list of attack
-		//1 melee, 2 range, 3 heal
-        /*
-        if (getHP() > 1)
-        {
-            playerStats.isPlayerTurn = false;
-
-           	//decide on move
-
-
-			else if 
-
-			
-            TurnFinished();
-		
-        }
-
-        else
-        {
-            GameObject.Destroy(gameObject);
-            EnemyHasDied();
-            myAnimator.SetBool("isDead", true);
-        }
-        */
 	}//end of enemyTurn()
 
     private void EnemyHasDied()
@@ -301,7 +241,7 @@ public class Enemy : Character {
 
     internal override void waitForAttackChoice()
     {
-      
+        isCurrently = EnemyState.ChooseAction;
     }
 
     public void enemyDamageTaken(int damage)

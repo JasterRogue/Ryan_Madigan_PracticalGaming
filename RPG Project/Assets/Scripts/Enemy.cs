@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class Enemy : Character {
 
+    enum EnemyState { Idle, ChooseAction, MeleeAttack, MagicAttack, Heal, runTo}
+    EnemyState isCurrently = EnemyState.Idle;
+
+
     int damage;
     int chanceOfCritical;
     int variedDamage;
@@ -45,35 +49,168 @@ public class Enemy : Character {
         Global.manager.ImHere(this);
 
         myAnimator = GetComponent<Animator>();
+       
         
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
+
+
+
     {
-        if(Global.manager.inBattle)
+
+
+        switch (isCurrently)
         {
-            isEnemyAlive = true;
+            case EnemyState.Idle:
+
+
+
+
+                break;
+
+            case EnemyState.ChooseAction:
+
+                if (getHP() < getMaxHP() / 4 && getMP() >= 8)
+                {
+                    //use heal
+
+                    myAnimator.SetBool("isHealing", true);
+
+                    info = myAnimator.GetCurrentAnimatorClipInfo(0);
+
+
+
+                    setHP(getHP() + 30);
+                    setMP(getMP() - 8);
+                    print("Magic heal");
+                    isCurrently = EnemyState.Heal;
+                }
+
+                else
+                {
+                    if (getMP() >= 10)
+                    {
+                        setMP(getMP() - 10);
+                        print("Magic Attack");
+                        calculateMagicDamage();
+
+                        myAnimator.SetBool("isCastingMagic", true);
+                        //do magic attack
+                        applyDamage(damage);
+
+                        info = myAnimator.GetCurrentAnimatorClipInfo(0);
+
+                        isCurrently = EnemyState.MagicAttack;
+
+                    }
+                    else
+                    {
+                        originalPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                        //do melee attack
+                        calculateMeleeDamage();
+
+
+
+                        isCurrently = EnemyState.runTo;
+
+
+                    }
+                }
+
+
+                break;
+
+            case EnemyState.Heal:
+
+
+                if (info[0].clip.name == "idle_A")
+                {
+                    myAnimator.SetBool("isHealing", false);
+                    isCurrently = EnemyState.Idle;
+                    TurnFinished();
+                }
+
+
+
+
+
+
+                break;
+
+            case EnemyState.MagicAttack:
+
+
+                if (info[0].clip.name == "idle_A")
+                {
+                    myAnimator.SetBool("isCastingMagic", false);
+                    isCurrently = EnemyState.Idle;
+                    TurnFinished();
+                }
+
+                break;
+
+            case EnemyState.runTo:
+
+
+                runToPlayer();
+
+                if (hasReachedPlayer())
+                {
+                    isCurrently = EnemyState.MeleeAttack;
+
+                }
+
+
+
+
+                break;
+
+
+            case EnemyState.MeleeAttack:
+
+                if (info[0].clip.name == "idle_A")
+                {
+                    myAnimator.SetBool("isAttacking", false);
+                    isCurrently = EnemyState.Idle;
+                    applyDamage(damage);
+                    transform.position = originalPosition;
+                    TurnFinished();
+                }
+
+                break;
+
+
+
+
+
+
         }
-
-        if(getHP()<1)
-        {
-            GameObject.Destroy(gameObject);
-            EnemyHasDied();
-        }
-
-
-
-		if (hasReachedPlayer ())
-		{
-			myAnimator.SetBool ("isAttacking", true);
-
-            if(myAnimator.GetCurrentAnimatorStateInfo(0).IsName("hk_side_left_A"))
-            {
-                myPlayerControl.playerKnockdown();
-            }
-		}    
     }
+  //      if(Global.manager.inBattle)
+  //      {
+  //          isEnemyAlive = true;
+  //      }
+
+  //      if(getHP()<1)
+  //      {
+  //          GameObject.Destroy(gameObject);
+  //          EnemyHasDied();
+  //      }
+
+
+
+		//if (hasReachedPlayer ())
+		//{
+		//	myAnimator.SetBool ("isAttacking", true);
+
+  //          if(myAnimator.GetCurrentAnimatorStateInfo(0).IsName("hk_side_left_A"))
+  //          {
+  //              myPlayerControl.playerKnockdown();
+  //          }
+		//}    
+  //  }
 
     public void updateStats()
     {
@@ -128,74 +265,23 @@ public class Enemy : Character {
 
     public void enemyTurn()
     {
+
+        isCurrently = EnemyState.ChooseAction;
+
 		//list of attack
 		//1 melee, 2 range, 3 heal
-
+        /*
         if (getHP() > 1)
         {
             playerStats.isPlayerTurn = false;
 
            	//decide on move
 
-			if (getHP () < getMaxHP () / 4 && getMP () >= 8)
-            {
-                //use heal
 
-                myAnimator.SetBool("isHealing", true);
+			else if 
 
-                info = myAnimator.GetCurrentAnimatorClipInfo(0);
-
-                if (info[0].clip.name == "Standing_2H_Cast_Spell_01")
-                {
-                    myAnimator.SetBool("isHealing", false);
-                }
-                setHP (getHP () + 30);
-				setMP (getMP () - 8);
-                print("Magic heal");
-			} 
-
-			else if (getMP () >= 10)
-			{
-				setMP (getMP () - 10);
-                print("Magic Attack");
-                calculateMagicDamage();
-
-                myAnimator.SetBool("isCastingMagic", true);
-                //do magic attack
-                applyDamage(damage);
-
-                info = myAnimator.GetCurrentAnimatorClipInfo(0);
-
-                if (info[0].clip.name == "Standing_2H_Magic_Attack_02")
-                {
-                    myAnimator.SetBool("isCastingMagic", false);
-                }
-
-                
-			}
-
-			else
-			{
-				originalPosition = new Vector3 (transform.position.x, transform.position.y, transform.position.z);
-				//do melee attack
-				calculateMeleeDamage();
-
-				//run to player
-				myAnimator.SetBool("isRunning", true);
-
-                while(!hasReachedPlayer())
-                {
-                    runToPlayer();
-                }
-
-				//do attack
-				applyDamage(damage);
-
-				//go back to position
-				transform.position = originalPosition;
-			}
-
-            playerStats.isPlayerTurn = true;
+			
+            TurnFinished();
 		
         }
 
@@ -205,7 +291,7 @@ public class Enemy : Character {
             EnemyHasDied();
             myAnimator.SetBool("isDead", true);
         }
-
+        */
 	}//end of enemyTurn()
 
     private void EnemyHasDied()

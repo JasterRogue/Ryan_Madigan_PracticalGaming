@@ -103,6 +103,8 @@ public class PlayerControl : MonoBehaviour
                         IAmCurrently = PlayerModes.Battle_Idle;
                         animate.SetBool("IsRunning", false);
                         pointForward();
+                        myPlayer.TurnFinished();
+                        
                     }
                 }
 

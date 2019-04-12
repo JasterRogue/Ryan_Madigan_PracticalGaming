@@ -112,6 +112,13 @@ public class BattleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (enemy && whosTurn != indexOfPlayer)
+        {
+            playerAttacking = false;
+            enemy.enemyTurn();
+        }
+
         switch (currently)
         {
 
@@ -195,11 +202,11 @@ public class BattleManager : MonoBehaviour
             enemy = FindObjectOfType<Enemy>();
         }//if enemy doesnt exist find it
 
-        if(enemy)
+       /* if(enemy && whosTurn != indexOfPlayer)
         {
             playerAttacking = false;
             enemy.enemyTurn();
-        } 
+        } */
 
         if (!myBattleText)
         {

@@ -21,8 +21,11 @@ public class BattleText : MonoBehaviour {
     {
         myPlayer = GameObject.Find("char_ethan").GetComponent<Player>();
         allButttons = FindObjectsOfType<Button>();
+      
         allButttons[1].onClick.AddListener(playerAttack);
-        allButttons[2].onClick.AddListener(magicAttack);
+        allButttons[0].onClick.AddListener(magicAttack);
+       // allButttons[2].onClick.AddListener(tryToEscape);
+       // allButttons[3].onClick.AddListener(useItem);
         setUpStats();
         
         

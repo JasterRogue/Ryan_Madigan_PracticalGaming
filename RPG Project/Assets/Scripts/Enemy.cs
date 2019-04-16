@@ -22,13 +22,17 @@ public class Enemy : Character {
     AnimatorClipInfo[] info;
     public bool isEnemyTurn;
     private bool magicAnimationStarted;
+	private bool healAnimationStarted;
+	private bool meleeAnimationStarted;
+	TextMeshScript my3DText;
+	public GameObject damageText;
 
     public Enemy()
     {
         setCharacterName("Bandit");
         setLevel(1);
         setMaxHP(80);
-        setMaxMP(50);
+        setMaxMP(30);
         setHP(getMaxHP());
         setMP(getMaxMP());
         setStrength(8);
@@ -50,6 +54,8 @@ public class Enemy : Character {
         Global.manager.ImHere(this);
 
         myAnimator = GetComponent<Animator>();   
+
+
     }
 
     // Update is called once per frame
@@ -59,26 +65,29 @@ public class Enemy : Character {
         {
             info = myAnimator.GetCurrentAnimatorClipInfo(0);
 
+			my3DText = FindObjectOfType<TextMeshScript> ();
+
             switch (isCurrently)
             {
                 case EnemyState.Idle:
 
                     break;
 
-                case EnemyState.ChooseAction:
+				case EnemyState.ChooseAction:
+				
 
                     if (getHP() < getMaxHP() / 4 && getMP() >= 8)
                     {
                         //use heal
 
                         myAnimator.SetBool("isHealing", true);
-
-             
-
-                        setHP(getHP() + 30);
+						setHP((getIntelligence() * 2) + 15);
                         setMP(getMP() - 8);
-                        print("Heal");
+                        //print("Heal");
+						healAnimationStarted = false;
+						myAnimator.SetBool ("isHealing", true);
                         isCurrently = EnemyState.Heal;
+						healAnimationStarted = false;
                     }
 
                     else
@@ -88,20 +97,16 @@ public class Enemy : Character {
                             setMP(getMP() - 10);
                             print("Magic Attack");
                             calculateMagicDamage();
-
-                            myAnimator.SetBool("isCastingMagic", true);
-                            //do magic attack
-                            applyDamage(damage);
-
-                    
-
+							applyDamage(damage);
+							myAnimator.SetBool ("isCastingMagic", true);
+                            //do magic attac
+                            
                             isCurrently = EnemyState.MagicAttack;
                             magicAnimationStarted = false;
-
                         }
                         else
                         {
-                            originalPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                            originalPosition = new Vector3(-0.82f, 0.045f, 5.576f);
                             //do melee attack
                             calculateMeleeDamage();
 
@@ -113,7 +118,9 @@ public class Enemy : Character {
 
                 case EnemyState.Heal:
 
-                    if (info[0].clip.name == "idle_A")
+				if ((!healAnimationStarted) && (info[0].clip.name == "Standing_2H_Cast_Spell_01")) healAnimationStarted = true;
+
+				if (healAnimationStarted && (info[0].clip.name == "idle_A"))
                     {
                         myAnimator.SetBool("isHealing", false);
                         isCurrently = EnemyState.Idle;
@@ -124,8 +131,6 @@ public class Enemy : Character {
                     break;
 
                 case EnemyState.MagicAttack:
-
-                  
 
                     if ((!magicAnimationStarted) && (info[0].clip.name == "Standing_2H_Magic_Attack_02")) magicAnimationStarted = true;
 
@@ -147,6 +152,7 @@ public class Enemy : Character {
                     if (hasReachedPlayer())
                     {
                         isCurrently = EnemyState.MeleeAttack;
+						meleeAnimationStarted = false;
                         myAnimator.SetBool("isAttacking", true);
 
                     }
@@ -155,10 +161,13 @@ public class Enemy : Character {
 
                 case EnemyState.MeleeAttack:
 
-                    if (info[0].clip.name == "idle_A")
+				if ((!meleeAnimationStarted) && (info[0].clip.name == "hk_side_left_A")) meleeAnimationStarted = true;
+
+					if (meleeAnimationStarted && (info[0].clip.name == "idle_A"))
                     {
                         myAnimator.SetBool("isAttacking", false);
                         isCurrently = EnemyState.Idle;
+						print("melee attack");
                         applyDamage(damage);
                         transform.position = originalPosition;
                         TurnFinished();
@@ -166,6 +175,8 @@ public class Enemy : Character {
                     }
 
                     break;
+
+
             }//end of switch()
         }
 
@@ -183,7 +194,7 @@ public class Enemy : Character {
         if(playerStats.getLevel() >= 1 && playerStats.getLevel() <= 4)
         {
             setMaxHP(80);
-            setMaxMP(50);
+            setMaxMP(30);
             setHP(getMaxHP());
             setMP(getMaxMP());
             setStrength(8);

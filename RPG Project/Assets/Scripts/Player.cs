@@ -19,6 +19,8 @@ public class Player : Character {
     Weapon weaponDamage;
     PlayerControl animateChar;
     public bool isPlayerAlive;
+	TextMeshScript my3DText;
+	public string damageText;
 
     public Player()
     {
@@ -64,6 +66,8 @@ public class Player : Character {
         if(Global.manager.inBattle == true)
         {
             enemyStats = GameObject.FindObjectOfType<Enemy>();
+
+			my3DText = GameObject.FindObjectOfType<TextMeshScript> ();
            // weaponDamage = GameObject.FindObjectOfType<Weapon>();
         }
 

@@ -37,6 +37,8 @@ public class BattleText : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+		setUpStats ();
+
         //if players hp is less than 30% change colour to yellow
         if (myPlayer.getHP() < hpUnder30Percent)
         {

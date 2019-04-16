@@ -24,9 +24,6 @@ public class Chest : MonoBehaviour {
     healthItem myHealthItem;
     mpItem myMPItem;
     
-    
-   
-
 	// Use this for initialization
 	void Start ()
     {

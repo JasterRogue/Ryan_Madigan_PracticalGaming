@@ -19,6 +19,7 @@ public class PlayerControl : MonoBehaviour
     Player myPlayer;
     float waitTimer=0.0f;
     AnimatorClipInfo[] info;
+	PauseScript myPauseScript;
 
 
     // Use this for initialization
@@ -27,6 +28,7 @@ public class PlayerControl : MonoBehaviour
         animate = GetComponentInChildren<Animator>();
         enemy = FindObjectOfType<Enemy>();
         myPlayer = FindObjectOfType<Player>();
+		myPauseScript = FindObjectOfType<PauseScript> ();
     
 	}
 
@@ -42,7 +44,7 @@ public class PlayerControl : MonoBehaviour
 
             Camera.main.transform.position = transform.position + new Vector3(0, 5, -5);
 
-                if (Input.GetKey(KeyCode.W))
+			if (Input.GetKey(KeyCode.W))
                 {
                     animate.SetBool("IsRunning", true);
                     moveForward(speed);
@@ -51,17 +53,17 @@ public class PlayerControl : MonoBehaviour
                 else
                     animate.SetBool("IsRunning", false);
 
-                if (Input.GetKey(KeyCode.A))
+			if (Input.GetKey(KeyCode.A))
                 {
                     turnLeft(turningSpeed);
                 }
 
-                if (Input.GetKey(KeyCode.D))
+			if (Input.GetKey(KeyCode.D))
                 {
                     turnRight(turningSpeed);
                 }
 
-                if (stepCount > stepCountdown)
+			if (stepCount > stepCountdown)
                     Global.manager.StepCountReached();
                 
                 break;

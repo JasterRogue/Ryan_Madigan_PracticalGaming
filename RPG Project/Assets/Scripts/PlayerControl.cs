@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -20,7 +21,8 @@ public class PlayerControl : MonoBehaviour
     float waitTimer=0.0f;
     AnimatorClipInfo[] info;
 	PauseScript myPauseScript;
-
+    private Scene scene;
+    TextMeshScript myTextMesh;
 
     // Use this for initialization
     void Start () {
@@ -28,7 +30,18 @@ public class PlayerControl : MonoBehaviour
         animate = GetComponentInChildren<Animator>();
         enemy = FindObjectOfType<Enemy>();
         myPlayer = FindObjectOfType<Player>();
-		myPauseScript = FindObjectOfType<PauseScript> ();
+		
+        scene = SceneManager.GetActiveScene();
+
+        if(scene.name.Equals("Test Scene"))
+        {
+            myPauseScript = FindObjectOfType<PauseScript>();
+        }
+
+        else
+        {
+            myTextMesh = FindObjectOfType<TextMeshScript>();
+        }
     
 	}
 
@@ -85,7 +98,9 @@ public class PlayerControl : MonoBehaviour
                     IAmCurrently = PlayerModes.Melee_Attack;
                     animate.SetBool("leftPunch", true);
                     animate.SetBool("battleIdle", false);
+                    //Global.textMesh.
                     myPlayer.DamageCall();
+                    myTextMesh.showText(myPlayer.damage, new Vector3(enemy.transform.position.x, enemy.transform.position.y + 10, enemy.transform.position.z));
 
                 }
 

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TextMeshScript : MonoBehaviour {
 
-    TextMesh myTextMesh;
+     TextMesh myTextMesh;
+     Color textAlpha;
 
 
 	// Use this for initialization
@@ -12,8 +13,9 @@ public class TextMeshScript : MonoBehaviour {
     {
         myTextMesh = FindObjectOfType<TextMesh>();
 
+        textAlpha = myTextMesh.color;
 
-		
+        textAlpha.a = 0.0f;
 	}
 	
 	// Update is called once per frame
@@ -22,22 +24,27 @@ public class TextMeshScript : MonoBehaviour {
 		
 	}
 
-    public void showText(int value, Vector3 textPosition)
+    public  void showText(int value, Vector3 textPosition)
     {
+        textAlpha.a = 255.0f;
+
         transform.position = textPosition;
         myTextMesh.text = value.ToString();
 
-        
+        raiseTextAndFade();
     }
 
-    public void raiseTextAndFade()
+    public  void raiseTextAndFade()
     {
         int count = 0;
 
-        while(count < 5)
+        while(count < 100)
         {
             transform.position = new Vector3(transform.position.x,transform.position.y+1,transform.position.z);
 
+            textAlpha.a--;
+
+            count++;
             
         }
     }

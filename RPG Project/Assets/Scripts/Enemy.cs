@@ -26,6 +26,7 @@ public class Enemy : Character {
 	private bool meleeAnimationStarted;
 	TextMeshScript my3DText;
 	public GameObject damageText;
+    TextMeshScript myTextMesh;
 
     public Enemy()
     {
@@ -53,7 +54,9 @@ public class Enemy : Character {
 
         Global.manager.ImHere(this);
 
-        myAnimator = GetComponent<Animator>();   
+        myAnimator = GetComponent<Animator>();
+
+        myTextMesh = FindObjectOfType<TextMeshScript>();
 
 
     }
@@ -100,7 +103,8 @@ public class Enemy : Character {
 							applyDamage(damage);
 							myAnimator.SetBool ("isCastingMagic", true);
                             //do magic attac
-                            
+                            myTextMesh.showText(damage, new Vector3(transform.position.x, transform.position.y + 10, transform.position.z));
+
                             isCurrently = EnemyState.MagicAttack;
                             magicAnimationStarted = false;
                         }

@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class TextMeshScript : MonoBehaviour {
 
-	public GameObject text3d;
+    TextMesh myTextMesh;
+
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
+        myTextMesh = FindObjectOfType<TextMesh>();
 
 
 		
@@ -18,6 +21,26 @@ public class TextMeshScript : MonoBehaviour {
 	{
 		
 	}
+
+    public void showText(int value, Vector3 textPosition)
+    {
+        transform.position = textPosition;
+        myTextMesh.text = value.ToString();
+
+        
+    }
+
+    public void raiseTextAndFade()
+    {
+        int count = 0;
+
+        while(count < 5)
+        {
+            transform.position = new Vector3(transform.position.x,transform.position.y+1,transform.position.z);
+
+            
+        }
+    }
 
 
 

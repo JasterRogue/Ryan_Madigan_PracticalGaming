@@ -24,7 +24,7 @@ public class Player : Character {
 
     public Player()
     {
-        setCharacterName("Ethan");
+        setCharacterName("Yuri");
         setLevel(1);
         setMaxHP(54);
         setMaxMP(30);

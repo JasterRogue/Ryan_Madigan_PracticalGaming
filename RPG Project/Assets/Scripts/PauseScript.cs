@@ -28,7 +28,7 @@ public class PauseScript : MonoBehaviour {
 		myPlayer = FindObjectOfType<Player> ();
 	
 
-		//pauseMenu.SetActive (false);
+		pauseMenu.SetActive (false);
 	}
 
 	// Update is called once per frame
@@ -40,7 +40,6 @@ public class PauseScript : MonoBehaviour {
 				paused = !paused;
 				pauseMenu.SetActive (paused);
 				setValues ();
-				print ("Escape pressed");
 			}
 	}
 

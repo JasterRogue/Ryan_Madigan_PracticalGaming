@@ -103,7 +103,8 @@ public class Enemy : Character {
 							applyDamage(damage);
 							myAnimator.SetBool ("isCastingMagic", true);
                             //do magic attac
-                            myTextMesh.showText(damage, new Vector3(transform.position.x, transform.position.y + 10, transform.position.z));
+                            //  myTextMesh.showText(damage, new Vector3(transform.position.x, transform.position.y + 10, transform.position.z));
+                            myTextMesh.createText(new Vector3(playerStats.transform.position.x, playerStats.transform.position.y + 2, playerStats.transform.position.z), damage);
 
                             isCurrently = EnemyState.MagicAttack;
                             magicAnimationStarted = false;

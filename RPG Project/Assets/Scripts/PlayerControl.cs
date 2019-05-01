@@ -11,7 +11,7 @@ public class PlayerControl : MonoBehaviour
     internal PlayerModes IAmCurrently = PlayerModes.Wandering;
 
     private float speed= 10.0f;
-    private float turningSpeed = 90.0f;
+    private float turningSpeed = 100.0f;
     private Animator animate;
     public int stepCount=0; // Used to count number of steps player has taken for triggering random encounters
     private int stepCountdown;
@@ -100,7 +100,8 @@ public class PlayerControl : MonoBehaviour
                     animate.SetBool("battleIdle", false);
                     //Global.textMesh.
                     myPlayer.DamageCall();
-                    myTextMesh.showText(myPlayer.damage, new Vector3(enemy.transform.position.x, enemy.transform.position.y + 10, enemy.transform.position.z));
+                    //  myTextMesh.showText(myPlayer.damage, new Vector3(enemy.transform.position.x, enemy.transform.position.y + 10, enemy.transform.position.z));
+                    myTextMesh.createText(new Vector3(enemy.transform.position.x, enemy.transform.position.y + 2, enemy.transform.position.z), myPlayer.damage);
 
                 }
 

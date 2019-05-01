@@ -4,52 +4,44 @@ using UnityEngine;
 
 public class TextMeshScript : MonoBehaviour {
 
-     TextMesh myTextMesh;
+     public Transform textMesh;
+     Transform txtMeshTransform;
      Color textAlpha;
+     TextMesh txtMesh;
+    float txtTimer;
 
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
-        myTextMesh = FindObjectOfType<TextMesh>();
-
-        textAlpha = myTextMesh.color;
-
-        textAlpha.a = 0.0f;
+        
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		
+		if(txtTimer < 3f && txtMesh)
+        {
+            txtMesh.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+
+            txtTimer += Time.deltaTime;
+        }
+
+        else
+        {
+            GameObject.Destroy(this);
+        }
 	}
 
-    public  void showText(int value, Vector3 textPosition)
+    public void createText(Vector3 textPos, int txtValue)
     {
-        textAlpha.a = 255.0f;
+        txtTimer = 0.0f;
 
-        transform.position = textPosition;
-        myTextMesh.text = value.ToString();
-
-        raiseTextAndFade();
+        Transform txtMeshTransform = (Transform)Instantiate(textMesh);
+        txtMesh = txtMeshTransform.GetComponent<TextMesh>();
+        txtMesh.text = txtValue.ToString();
+        txtMesh.transform.position = textPos;
+        
     }
-
-    public  void raiseTextAndFade()
-    {
-        int count = 0;
-
-        while(count < 100)
-        {
-            transform.position = new Vector3(transform.position.x,transform.position.y+1,transform.position.z);
-
-            textAlpha.a--;
-
-            count++;
-            
-        }
-    }
-
-
-
 
 }

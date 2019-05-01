@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311926, g: 0.38074008, b: 0.35872707, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -195,7 +195,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 37523775}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 569, y: 262.5, z: 0}
+  m_LocalPosition: {x: 662.5, y: 339, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 821024179}
@@ -2213,7 +2213,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1802582891}
   - component: {fileID: 1802582890}
-  - component: {fileID: 1802582889}
   - component: {fileID: 1802582892}
   m_Layer: 0
   m_Name: 3D Text
@@ -2222,27 +2221,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!102 &1802582889
-TextMesh:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1802582888}
-  m_Text: 999
-  m_OffsetZ: 0
-  m_CharacterSize: 0.1
-  m_LineSpacing: 200
-  m_Anchor: 1
-  m_Alignment: 1
-  m_TabSize: 4
-  m_FontSize: 45
-  m_FontStyle: 0
-  m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Color:
-    serializedVersion: 2
-    rgba: 4278255580
 --- !u!23 &1802582890
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2301,6 +2279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08973725db1d2154483ea14e5eec8859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textMesh: {fileID: 4639138948980810, guid: 468cc944934a1ad47bf3ad7bd24634de, type: 2}
 --- !u!1 &1807394281
 GameObject:
   m_ObjectHideFlags: 0

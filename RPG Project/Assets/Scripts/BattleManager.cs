@@ -86,6 +86,34 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    internal void EscapeButtonPressed()
+    {
+        if (whosTurn == indexOfPlayer)
+        {
+            (combatants[indexOfPlayer] as Player).MagicCast();
+            player.magicAttack();
+            playerAttacking = true;
+        }
+
+        if (!enemy)
+        {
+            enemy = FindObjectOfType<Enemy>();
+        }//if enemy doesnt exist find it
+
+
+
+        if (!myBattleText)
+        {
+            myBattleText = FindObjectOfType<BattleText>();
+        }
+
+
+        if (myBattleText)
+        {
+            myBattleText.setUpStats();
+        }
+    }
+
     internal void ImHere(Enemy newplayer)
     {
         combatants.Add(newplayer);
@@ -205,5 +233,14 @@ public class BattleManager : MonoBehaviour
             myBattleText.setUpStats();
         }
         
+    }
+
+    public void playerEscaped()
+    {
+        SceneManager.LoadScene("Test Scene");
+        inBattle = false;
+        stepsToBattle = UnityEngine.Random.Range(150, 301);
+        myPlayerControl.StepsToNextBattleIs(stepsToBattle, inBattle);
+        myPlayerControl.stepCount = 0;
     }
 }//end of class

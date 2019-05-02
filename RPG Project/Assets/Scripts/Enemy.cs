@@ -27,6 +27,7 @@ public class Enemy : Character {
 	TextMeshScript my3DText;
 	public GameObject damageText;
     TextMeshScript myTextMesh;
+    FireEffect myFireEffect;
 
     public Enemy()
     {
@@ -57,6 +58,8 @@ public class Enemy : Character {
         myAnimator = GetComponent<Animator>();
 
         myTextMesh = FindObjectOfType<TextMeshScript>();
+
+        myFireEffect = FindObjectOfType<FireEffect>();
 
 
     }
@@ -136,6 +139,8 @@ public class Enemy : Character {
                     break;
 
                 case EnemyState.MagicAttack:
+
+                    myFireEffect.playFireEffect(transform.position);
 
                     if ((!magicAnimationStarted) && (info[0].clip.name == "Standing_2H_Magic_Attack_02")) magicAnimationStarted = true;
 

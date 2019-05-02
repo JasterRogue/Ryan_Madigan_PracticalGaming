@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerControl : MonoBehaviour
 {
 
-    internal enum PlayerModes { Wandering, Battle_Idle, MoveToAttack, Melee_Attack, Move_Back, Range_Attack  };
+    internal enum PlayerModes { Wandering, Battle_Idle, MoveToAttack, Melee_Attack, Move_Back, Range_Attack, Escape  };
     internal PlayerModes IAmCurrently = PlayerModes.Wandering;
 
     private float speed= 10.0f;
@@ -23,6 +23,7 @@ public class PlayerControl : MonoBehaviour
 	PauseScript myPauseScript;
     private Scene scene;
     TextMeshScript myTextMesh;
+    int escapeChance;
 
     // Use this for initialization
     void Start () {
@@ -128,6 +129,45 @@ public class PlayerControl : MonoBehaviour
 
                 break;
 
+            case PlayerModes.Escape:
+
+                if(myPlayer.getAgility() > enemy.getAgility())
+                {
+                    //can escape
+                    pointBack();
+                    animate.SetBool("isRunning", true);
+                    animate.SetBool("battleIdle", false);
+                    Global.manager.playerEscaped();
+                    print("Better agility escape");
+                }
+
+                else
+                {
+                    //else down to chance
+                    escapeChance = UnityEngine.Random.Range(0, 101);
+
+                    if(escapeChance <= 25)
+                    {
+                        //escape success
+                        pointBack();
+                        animate.SetBool("isRunning", true);
+                        animate.SetBool("battleIdle", false);
+                        Global.manager.playerEscaped();
+                        print("Lucky escape");
+                        
+                    }
+
+                    else
+                    {
+                        //escape failed
+                        myTextMesh.escapeFailed(new Vector3(transform.position.x, transform.position.y + 2, transform.position.z));
+                        myPlayer.TurnFinished();
+                        print("escape failed");
+                    }
+                }
+
+                break;
+
         }//end of switch(iAmCurrently)
 
     }//end of update()
@@ -226,6 +266,11 @@ public class PlayerControl : MonoBehaviour
         IAmCurrently = PlayerModes.Range_Attack;
         animate.SetBool("battleIdle", false);
        // animate.SetBool();
+    }
+
+    public void initiateEscapeAttempt()
+    {
+        IAmCurrently = PlayerModes.Escape;
     }
 
     public void moveInBattle()

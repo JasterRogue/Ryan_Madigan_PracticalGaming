@@ -182,6 +182,11 @@ public class Player : Character {
         animateChar.initiateMagicAttack();
     }
 
+    internal void EscapeAttempt()
+    {
+        animateChar.initiateEscapeAttempt();
+    }
+
     internal override void waitForAttackChoice()
     {
         currently = PlayerModes.WaitForUserInput;

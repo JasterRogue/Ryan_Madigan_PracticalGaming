@@ -1,0 +1,5 @@
+A list of everything new that has been added to the game :
+
+- Created an effect for magic attacks
+- Added function to escape button(Doesn't work yet)
+

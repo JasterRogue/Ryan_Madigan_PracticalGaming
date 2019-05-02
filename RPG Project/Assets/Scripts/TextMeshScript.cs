@@ -20,28 +20,25 @@ public class TextMeshScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		if(txtTimer < 3f && txtMesh)
-        {
-            txtMesh.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
-
-            txtTimer += Time.deltaTime;
-        }
-
-        else
-        {
-            GameObject.Destroy(this);
-        }
+	
 	}
 
     public void createText(Vector3 textPos, int txtValue)
     {
-        txtTimer = 0.0f;
-
         Transform txtMeshTransform = (Transform)Instantiate(textMesh);
         txtMesh = txtMeshTransform.GetComponent<TextMesh>();
         txtMesh.text = txtValue.ToString();
         txtMesh.transform.position = textPos;
         
+    }
+
+    public void escapeFailed(Vector3 textPos)
+    {
+        Transform txtMeshTransform = (Transform)Instantiate(textMesh);
+        txtMesh = txtMeshTransform.GetComponent<TextMesh>();
+        txtMesh.text = "Escape Attempt Failed";
+        txtMesh.transform.position = textPos;
+
     }
 
 }

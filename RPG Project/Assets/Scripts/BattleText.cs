@@ -24,14 +24,14 @@ public class BattleText : MonoBehaviour {
       
         allButttons[1].onClick.AddListener(playerAttack);
         allButttons[0].onClick.AddListener(magicAttack);
-       // allButttons[2].onClick.AddListener(tryToEscape);
-       // allButttons[3].onClick.AddListener(useItem);
+        allButttons[2].onClick.AddListener(escape);
+        allButttons[3].onClick.AddListener(useItem);
         setUpStats();
-        
-        
-        
-        
-   
+
+        for(int i = 0;i < allButttons.Length; i++)
+        {
+            print("Button " + i + " is " + allButttons[i]);
+        }  
     }
 	
 	// Update is called once per frame
@@ -71,6 +71,16 @@ public class BattleText : MonoBehaviour {
     public void magicAttack()
     {
         Global.manager.MagicButtonPressed();
+    }
+
+    public void escape()
+    {
+        Global.manager.EscapeButtonPressed();
+    }
+
+    public void useItem()
+    {
+        //add code
     }
 
     public void setUpStats()

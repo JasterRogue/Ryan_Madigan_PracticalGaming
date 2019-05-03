@@ -6,10 +6,10 @@ public class FireEffect : MonoBehaviour {
 
     public GameObject fireEffectGO;
     ParticleSystem fireEffect;
-
 	// Use this for initialization
 	void Start ()
     {
+        
 	
 	}
 	

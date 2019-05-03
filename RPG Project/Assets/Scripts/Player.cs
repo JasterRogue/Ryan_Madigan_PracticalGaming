@@ -170,6 +170,21 @@ public class Player : Character {
         damage = damage + variedDamage;
     }
 
+    public void calculateMagicDamage()
+    {
+        damage = ((getIntelligence() * 3) - enemyStats.getSpecialDefence());
+
+        if (damage < 1)
+        {
+            //opponents defence could be so high that the damage ends up as negative number
+            damage = 1;
+        }
+
+        variedPercent = UnityEngine.Random.Range(0, 21);
+        variedDamage = ((damage * variedPercent) / 100);
+        damage = damage + variedDamage;
+    }
+
     internal void MeleeAttack()
     {
         animateChar.initiateMeleeAttack();

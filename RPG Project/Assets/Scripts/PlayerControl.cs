@@ -24,6 +24,8 @@ public class PlayerControl : MonoBehaviour
     private Scene scene;
     TextMeshScript myTextMesh;
     int escapeChance;
+    private bool magicAnimationStarted;
+    FireEffect myFireEffect;
 
     // Use this for initialization
     void Start () {
@@ -42,6 +44,7 @@ public class PlayerControl : MonoBehaviour
         else
         {
             myTextMesh = FindObjectOfType<TextMeshScript>();
+            myFireEffect = FindObjectOfType<FireEffect>();
         }
     
 	}
@@ -83,6 +86,7 @@ public class PlayerControl : MonoBehaviour
             case PlayerModes.Battle_Idle:
 
                 animate.SetBool("battleIdle", true);
+                animate.SetBool("isCastingMagic", false);
                 playerPositionBeforeAttack = new Vector3(transform.position.x, transform.position.y, transform.position.z);
                 waitTimer = 0f;
                 
@@ -125,6 +129,31 @@ public class PlayerControl : MonoBehaviour
                         
                     }
                 }
+
+                break;
+
+            case PlayerModes.Range_Attack:
+
+                
+
+                if(!magicAnimationStarted)
+                {
+                    myPlayer.setMP(myPlayer.getMP() - 10);
+                    print("Magic Attack");
+                    myPlayer.calculateMagicDamage();
+                    myPlayer.applyDamage(myPlayer.damage);
+                    animate.SetBool("isCastingMagic", true);
+                    //do magic attac
+
+                    myTextMesh.createText(new Vector3(enemy.transform.position.x, enemy.transform.position.y + 2, enemy.transform.position.z), myPlayer.damage);
+                    myFireEffect.playFireEffect(transform.position);
+                    magicAnimationStarted = true;
+                    myPlayer.TurnFinished();
+                    IAmCurrently = PlayerModes.Battle_Idle;
+
+                }
+
+                
 
                 break;
 

@@ -111,6 +111,7 @@ public class Enemy : Character {
 
                             isCurrently = EnemyState.MagicAttack;
                             magicAnimationStarted = false;
+                            myFireEffect.playFireEffect(transform.position);
                         }
                         else
                         {
@@ -140,7 +141,7 @@ public class Enemy : Character {
 
                 case EnemyState.MagicAttack:
 
-                    myFireEffect.playFireEffect(transform.position);
+                   // myFireEffect.playFireEffect(transform.position);
 
                     if ((!magicAnimationStarted) && (info[0].clip.name == "Standing_2H_Magic_Attack_02")) magicAnimationStarted = true;
 

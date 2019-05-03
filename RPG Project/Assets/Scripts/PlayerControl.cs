@@ -49,8 +49,6 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update() {
 
-
-
         switch (IAmCurrently)
         {
 
@@ -87,6 +85,7 @@ public class PlayerControl : MonoBehaviour
                 animate.SetBool("battleIdle", true);
                 playerPositionBeforeAttack = new Vector3(transform.position.x, transform.position.y, transform.position.z);
                 waitTimer = 0f;
+                
 
                 break;
 
@@ -135,9 +134,10 @@ public class PlayerControl : MonoBehaviour
                 {
                     //can escape
                     pointBack();
-                    animate.SetBool("isRunning", true);
-                    animate.SetBool("battleIdle", false);
-                    Global.manager.playerEscaped();
+                    animate.SetBool("IsRunning", true);
+                    //animate.SetBool("battleIdle", false);
+                  //  Global.manager.playerEscaped();
+                    StartCoroutine(Global.manager.playerEscaped());
                     print("Better agility escape");
                 }
 
@@ -150,9 +150,9 @@ public class PlayerControl : MonoBehaviour
                     {
                         //escape success
                         pointBack();
-                        animate.SetBool("isRunning", true);
-                        animate.SetBool("battleIdle", false);
-                        Global.manager.playerEscaped();
+                        animate.SetBool("IsRunning", true);
+                       // animate.SetBool("battleIdle", false);
+                        StartCoroutine(Global.manager.playerEscaped());
                         print("Lucky escape");
                         
                     }
@@ -160,7 +160,6 @@ public class PlayerControl : MonoBehaviour
                     else
                     {
                         //escape failed
-                        myTextMesh.escapeFailed(new Vector3(transform.position.x, transform.position.y + 2, transform.position.z));
                         myPlayer.TurnFinished();
                         print("escape failed");
                     }
@@ -242,7 +241,7 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     private void turnLeft(float turningSpeed)
     {
-        transform.Rotate(Vector3.up, turningSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.down, turningSpeed * Time.deltaTime);
     }
 
     /// <summary>
@@ -250,7 +249,7 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     private void turnRight(float turningSpeed)
     {
-        transform.Rotate(Vector3.down, turningSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.up, turningSpeed * Time.deltaTime);
     }
 
     public void initiateMeleeAttack()

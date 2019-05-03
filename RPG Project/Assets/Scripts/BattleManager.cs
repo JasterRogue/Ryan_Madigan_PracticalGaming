@@ -30,6 +30,7 @@ public class BattleManager : MonoBehaviour
     List<Character> combatants;
     int whosTurn = 0;
     private int indexOfPlayer;
+    TextMeshScript myTxtMesh;
 
     // Start is called before the first frame update
     void Start()
@@ -87,11 +88,11 @@ public class BattleManager : MonoBehaviour
     }
 
     internal void EscapeButtonPressed()
-    {
+    {  
         if (whosTurn == indexOfPlayer)
         {
-            (combatants[indexOfPlayer] as Player).MagicCast();
-            player.magicAttack();
+            (combatants[indexOfPlayer] as Player).EscapeAttempt();
+            //player.magicAttack();
             playerAttacking = true;
         }
 
@@ -131,6 +132,8 @@ public class BattleManager : MonoBehaviour
         combatants = new List<Character>();
   
         currently = BattlePhase.InformOfTurn;
+
+        myTxtMesh = FindObjectOfType<TextMeshScript>();
     }
 
     // Update is called once per frame
@@ -235,8 +238,9 @@ public class BattleManager : MonoBehaviour
         
     }
 
-    public void playerEscaped()
+    public IEnumerator playerEscaped()
     {
+        yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene("Test Scene");
         inBattle = false;
         stepsToBattle = UnityEngine.Random.Range(150, 301);

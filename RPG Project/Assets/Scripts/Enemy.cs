@@ -28,6 +28,9 @@ public class Enemy : Character {
 	public GameObject damageText;
     TextMeshScript myTextMesh;
     FireEffect myFireEffect;
+	private float hpPercent;
+	private float mpPercent;
+	BattleText myBattleText;
 
     public Enemy()
     {
@@ -60,6 +63,8 @@ public class Enemy : Character {
         myTextMesh = FindObjectOfType<TextMeshScript>();
 
         myFireEffect = FindObjectOfType<FireEffect>();
+
+		myBattleText = FindObjectOfType<BattleText> ();
 
 
     }
@@ -94,6 +99,11 @@ public class Enemy : Character {
 						myAnimator.SetBool ("isHealing", true);
                         isCurrently = EnemyState.Heal;
 						healAnimationStarted = false;
+						hpPercent = (float)getHP () / (float)getMaxHP ();
+						mpPercent = (float)getMP () / (float)getMaxMP ();
+						myBattleText.updateMP (mpPercent);
+						myBattleText.updateHP (hpPercent);
+
                     }
 
                     else
@@ -101,6 +111,8 @@ public class Enemy : Character {
                         if (getMP() >= 10)
                         {
                             setMP(getMP() - 10);
+							mpPercent = (float)getMP () / (float)getMaxMP ();
+							myBattleText.updateMP (mpPercent);
                             print("Magic Attack");
                             calculateMagicDamage();
 							applyDamage(damage);
@@ -269,6 +281,9 @@ public class Enemy : Character {
     public void enemyDamageTaken(int damage)
     {
         setHP(getHP() - damage);
+		hpPercent = (float)getHP () / (float)getMaxHP ();
+		myBattleText.updateHP (hpPercent);
+
     }
 
     public void applyDamage(int damage)

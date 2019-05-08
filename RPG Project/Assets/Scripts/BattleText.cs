@@ -10,6 +10,8 @@ public class BattleText : MonoBehaviour {
     public Text maxHPText;
     public Text currentMPText;
     public Text maxMPText;
+	public Image enemyHPBar; 
+	public Image enemyMPBar;
 
     Player myPlayer;
     int hpUnder30Percent;
@@ -101,4 +103,15 @@ public class BattleText : MonoBehaviour {
         currentMPText.color = new Color(255.0f, 255.0f, 255.0f);
         maxMPText.color = new Color(255.0f, 255.0f, 255.0f);
     }
+
+	public void updateHP(float hpPercent)
+	{
+		enemyHPBar.fillAmount = hpPercent;
+		
+	}
+
+	public void updateMP(float mpPercent)
+	{
+		enemyMPBar.fillAmount = mpPercent;
+	}
 }

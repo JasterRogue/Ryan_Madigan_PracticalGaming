@@ -4,7 +4,7 @@ A list of everything new that has been added to the game :
 - Particle effect is instantiated and plays once.
 - Added function to escape button
 - A now rotates left as it should and D rotates right as it should.
-- Brought in character from 3D Animation along with animations for it. The character can be found at the beginning of the game inside a 
-  cell.
+- Brought in character from 3D Animation along with animations for it. The character can be found at the beginning of the game inside a cell.
 - Added function for magic button
+- Added HP and MP Bar for enemy, is in top left corner in battle   scene and changes to reflect current HP and MP values
 

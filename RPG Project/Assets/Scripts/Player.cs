@@ -21,6 +21,8 @@ public class Player : Character {
     public bool isPlayerAlive;
 	TextMeshScript my3DText;
 	public string damageText;
+	BattleText myBattleText;
+	private float hpPercent;
 
     public Player()
     {
@@ -68,6 +70,8 @@ public class Player : Character {
             enemyStats = GameObject.FindObjectOfType<Enemy>();
 
 			my3DText = GameObject.FindObjectOfType<TextMeshScript> ();
+
+			myBattleText = FindObjectOfType<BattleText> ();
            // weaponDamage = GameObject.FindObjectOfType<Weapon>();
         }
 
@@ -216,6 +220,8 @@ public class Player : Character {
     {
         //applies damage calculated
         enemyStats.setHP(enemyStats.getHP() - damage);
+		hpPercent = (float)enemyStats.getHP () / (float)enemyStats.getMaxHP ();
+		myBattleText.updateHP (hpPercent);
     }
 
     public void DamageCall()

@@ -177,6 +177,7 @@ public class Enemy : Character {
                         isCurrently = EnemyState.MeleeAttack;
 						meleeAnimationStarted = false;
                         myAnimator.SetBool("isAttacking", true);
+						myTextMesh.createText(new Vector3(playerStats.transform.position.x, playerStats.transform.position.y + 2, playerStats.transform.position.z), damage);
 
                     }
 
